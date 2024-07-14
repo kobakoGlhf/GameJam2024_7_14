@@ -13,6 +13,7 @@ public class Choices : MonoBehaviour
     [SerializeField] Text _textD;
     [SerializeField] GameObject _goodEffect;
     [SerializeField] GameObject _badEffect;
+    [SerializeField] Slider _timeSlider;
     string[] _selectedChoices = new string[8];
     public int _choicesCount;
     public static int _score;
@@ -20,7 +21,8 @@ public class Choices : MonoBehaviour
 
     private void Start()
     {
-        for(int i=0; i<=8; i++)
+        //ŠÖ”‚ÌƒŠƒZƒbƒg
+        for(int i=0; i<8; i++)
         {
             _selectedChoices[i] = null;
         }
