@@ -7,41 +7,62 @@ public class TalkText : MonoBehaviour
     bool _isFirst;
     bool _isFirst2;
     bool _isFirst3;
-    bool _isFirst4;
-    int _index = 0;
+    public int _index = 0;
     string[] _words;
     Choices _choices;
     [SerializeField] string[] _talk;
-    [SerializeField] Text _text;
+    public Text _text;
     [SerializeField] GameObject _masseageBox;
     Coroutine _dialogue;
 
     // Start is called before the first frame update
     void Start()
     {
-        _dialogue = StartCoroutine(Dialogue());
+        _dialogue = StartCoroutine("Dialogue");
         _choices = GetComponent<Choices>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (_index == 3 && !_isFirst)
         {
-            StartCoroutine(TextHide());
-            _isFirst = true;
+            _text.text = "（なんてコメントしようかな？？）";
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                TextHidden();
+                _isFirst = true;
+                enabled = false;
+            }
+            return;
         }
-        if (_index == 5 && !_isFirst)
+        else if (_index == 5 && !_isFirst2)
         {
-            StartCoroutine(TextHide());
-            _isFirst = true;
+            _text.text = "（なんてコメントしようかな？？）";
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                TextHidden();
+                _isFirst2 = true;
+                _choices.enabled = true;
+                enabled = false;
+            }
+            return;
         }
-        if (_index == 7 && !_isFirst)
+        else if (_index == 7 && !_isFirst3)
         {
-            StartCoroutine(TextHide());
-            _isFirst = true;
+            _text.text = "（なんてコメントしようかな？？）";
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                TextHidden();
+                _isFirst3 = true;
+                _choices.enabled = true;
+                enabled = false;
+            }
+            return;
         }
 
+        //スペースを押したら進む
         if (Input.GetKeyDown(KeyCode.Space) && _dialogue == null)
         {
             _text.text = "";
@@ -49,32 +70,24 @@ public class TalkText : MonoBehaviour
             _dialogue = StartCoroutine(Dialogue());
         }
 
-        if(_choices._choicesCount == 3 && _dialogue == null)
-        {
-            if (!_isFirst2)
-            {
-                SecondRound();
-            }
-        }
-
-        if (_choices._choicesCount == 6 && _dialogue == null)
-        {
-            if (!_isFirst3)
-            {
-                ThirdRound();
-            }
-        }
-
-        if (_choices._choicesCount == 9 && _dialogue == null)
-        {
-            if (!_isFirst4)
-            {
-                Ending();
-            }
-        }
+    }
+    void TextHidden()
+    {
+        _masseageBox.SetActive(false);
+        _text.gameObject.SetActive(false);
+        _choices.ChoiceDisplay();
+        _choices.TimerStart();
+        _choices._gameStart = true;
     }
 
-    IEnumerator Dialogue()
+    public void TextActive()
+    {
+        _masseageBox.SetActive(true);
+        _text.gameObject.SetActive(true);
+        _choices._gameStart = false;
+    }
+
+    IEnumerator Dialogue() //1文字ずつ表示する
     {
         _words = _talk[_index].Split(' ');
 
@@ -84,52 +97,5 @@ public class TalkText : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         _dialogue = null;
-    }
-
-    IEnumerator TextHide()
-    {
-        yield return new WaitForSeconds(2f);
-        _masseageBox.SetActive(false);
-        _text.gameObject.SetActive(false);
-        _choices.ChoiceDisplay();
-        _choices.TimerStart();
-        _choices._gameStart = true;
-        yield break;
-    }
-
-    void SecondRound()
-    {
-        _isFirst = false;
-        _choices._gameStart = false;
-        _masseageBox.SetActive(true);
-        _text.gameObject.SetActive(true);
-        _text.text = "";
-        _index = 4;
-        _dialogue = StartCoroutine(Dialogue());
-        _isFirst2 = true;
-    }
-
-    void ThirdRound()
-    {
-        _isFirst = false;
-        _choices._gameStart = false;
-        _masseageBox.SetActive(true);
-        _text.gameObject.SetActive(true);
-        _text.text = "";
-        _index = 6;
-        _dialogue = StartCoroutine(Dialogue());
-        _isFirst3 = true;
-    }
-
-    void Ending()
-    {
-        _isFirst = false;
-        _choices._gameStart = false;
-        _masseageBox.SetActive(true);
-        _text.gameObject.SetActive(true);
-        _text.text = "";
-        _index = 8;
-        _dialogue = StartCoroutine(Dialogue());
-        _isFirst4 = true;
     }
 }

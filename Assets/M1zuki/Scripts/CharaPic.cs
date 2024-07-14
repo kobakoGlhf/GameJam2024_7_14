@@ -6,7 +6,8 @@ public class CharaPic : MonoBehaviour
     public static int _charaNam = 0;
     bool _isFirst = false;
     [SerializeField] GameObject _fadePanel;
-    [SerializeField] Animator _bgmObj;
+    GameObject _bgmObj;
+    Animator _bgmAnimator;
     [SerializeField] int _changeSceneWaitTime = 2;
 
     // Start is called before the first frame update
@@ -14,7 +15,9 @@ public class CharaPic : MonoBehaviour
     {
         _charaNam = 0;
         _fadePanel.SetActive(false);
-        _bgmObj.enabled = false;
+        _bgmObj = GameObject.Find("BGM");
+        _bgmAnimator = _bgmObj.GetComponent<Animator>();
+        _bgmAnimator.enabled = false;
     }
 
     // Update is called once per frame
@@ -48,12 +51,13 @@ public class CharaPic : MonoBehaviour
     {
         _fadePanel.SetActive(true);
         _isFirst = true;
-        _bgmObj.enabled = true;
+        _bgmAnimator.enabled = true;
         Invoke("SceneChange", _changeSceneWaitTime);
     }
 
     void SceneChange()
     {
+        Destroy(_bgmObj);
         SceneManager.LoadScene("TestScene_Mizuki");
     }
 }
