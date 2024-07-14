@@ -21,12 +21,6 @@ public class Choices : MonoBehaviour
 
     private void Start()
     {
-        //ŠÖ”‚ÌƒŠƒZƒbƒg
-        for(int i=0; i<8; i++)
-        {
-            _selectedChoices[i] = null;
-        }
-        _choicesCount = 0;
         _goodEffect.SetActive(false);
         _badEffect.SetActive(false);
     }
