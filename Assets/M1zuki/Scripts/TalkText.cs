@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TalkText : MonoBehaviour
@@ -61,6 +62,13 @@ public class TalkText : MonoBehaviour
             }
             return;
         }
+        else if (_index == 9)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SceneManager.LoadScene("ResultScene");
+            }
+        }
 
         //スペースを押したら進む
         if (Input.GetKeyDown(KeyCode.Space) && _dialogue == null)
@@ -69,6 +77,7 @@ public class TalkText : MonoBehaviour
             _index++;
             _dialogue = StartCoroutine(Dialogue());
         }
+
 
     }
     void TextHidden()

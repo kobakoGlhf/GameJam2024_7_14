@@ -24,7 +24,7 @@ public class Choices : MonoBehaviour
     {
         _talkText = GetComponent<TalkText>();
         //_goodEffect.SetActive(false);
-        _badEffect.SetActive(false);
+        //_badEffect.SetActive(false);
     }
     public void ChoiceDisplay()
     {
