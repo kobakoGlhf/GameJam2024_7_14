@@ -13,7 +13,7 @@ public class Choices : MonoBehaviour
     [SerializeField] Text _textD;
     [SerializeField] float _effectTime;
     string[] _selectedChoices = new string[8];
-    int _choicesCount;
+    public int _choicesCount;
     public static int _score;
     public bool _gameStart;
     
@@ -65,10 +65,11 @@ public class Choices : MonoBehaviour
     {
         if (_gameStart)
         {
-            Debug.Log("GameStart");
+            Debug.Log(_choicesCount);
             if (Input.GetKeyDown(KeyCode.W))
             {
                 ChoiceW();
+                Debug.Log("W");
             }
             else if (Input.GetKeyDown(KeyCode.A))
             {
