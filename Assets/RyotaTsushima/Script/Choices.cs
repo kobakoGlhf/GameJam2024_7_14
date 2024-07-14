@@ -13,6 +13,7 @@ public class Choices : MonoBehaviour
     [SerializeField] Text _textD;
     string[] _selectedChoices = new string[8];
     int _choicesCount;
+    public static int _score;
     
     public void ChoiceDisplay()
     {
@@ -95,6 +96,16 @@ public class Choices : MonoBehaviour
         }
     }
 
+    public void AddScore(int times, int correct1, int correct2, int correct3)   //スコア加算　正解のインデックスを入力してください
+    {
+        if (_selectedChoices[times * 3] == _choices[correct1]
+            && _selectedChoices[times * 3 +1] == _choices[correct2] 
+            && _selectedChoices[times * 3 + 2] == _choices[correct3])
+        {
+            _score++;
+        }
+    }
+
     IEnumerator ChoicesTimer()   //選択のタイマー
     {
         yield return new WaitForSeconds(_limitedTime);
@@ -108,6 +119,6 @@ public class Choices : MonoBehaviour
 
     public void Debuga(int num)   //デバッグ用
     {
-        Debug.Log(_selectedChoices[num]);
+        Debug.Log(_selectedChoices[num] + _score);
     }
 }
