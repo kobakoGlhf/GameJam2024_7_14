@@ -11,6 +11,7 @@ public class Choices : MonoBehaviour
     [SerializeField] Text _textA;
     [SerializeField] Text _textS;
     [SerializeField] Text _textD;
+    [SerializeField] float _effectTime;
     string[] _selectedChoices = new string[8];
     int _choicesCount;
     public static int _score;
@@ -106,7 +107,7 @@ public class Choices : MonoBehaviour
         }
     }
 
-    IEnumerator ChoicesTimer()   //選択のタイマー
+    public IEnumerator ChoicesTimer()   //選択のタイマー
     {
         yield return new WaitForSeconds(_limitedTime);
         if (_selectedChoices[_choicesCount] == null)
@@ -120,5 +121,15 @@ public class Choices : MonoBehaviour
     public void Debuga(int num)   //デバッグ用
     {
         Debug.Log(_selectedChoices[num] + _score);
+    }
+
+    IEnumerator Correct()
+    {
+        float timer = 0;
+        while (timer>= _effectTime)
+        {
+            yield return null;
+            timer += Time.deltaTime;
+        }
     }
 }
