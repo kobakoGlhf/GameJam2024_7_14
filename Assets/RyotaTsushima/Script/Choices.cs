@@ -133,12 +133,21 @@ public class Choices : MonoBehaviour
 
     public IEnumerator ChoicesTimer()   //選択のタイマー
     {
-        yield return new WaitForSeconds(_limitedTime);
-        if (_selectedChoices[_choicesCount] == null)
+        float timer = 0;
+        while (timer <= _limitedTime)
         {
-            int _random = Random.Range(0, 3);
-            _selectedChoices[_choicesCount] = _choices[_choicesCount * 4 + _random];
+            if (_selectedChoices[_choicesCount] == null)
+            {
+                yield return null;
+            }
+            else
+            {
+                yield break;
+            }
+            timer += Time.deltaTime;
         }
+        int _random = Random.Range(0, 3);
+        _selectedChoices[_choicesCount] = _choices[_choicesCount * 4 + _random];
         _choicesCount++;
     }
 
