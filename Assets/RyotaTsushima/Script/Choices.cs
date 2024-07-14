@@ -12,6 +12,8 @@ public class Choices : MonoBehaviour
     [SerializeField] Text _textS;
     [SerializeField] Text _textD;
     [SerializeField] float _effectTime;
+    [SerializeField] GameObject _goodEffect;
+    [SerializeField] GameObject _badEffect;
     string[] _selectedChoices = new string[8];
     public int _choicesCount;
     public static int _score;
@@ -134,6 +136,11 @@ public class Choices : MonoBehaviour
             && _selectedChoices[times * 3 + 2] == _choices[correct3])
         {
             _score++;
+            StartCoroutine(GoodEffect());
+        }
+        else
+        {
+            StartCoroutine(BadEffect());
         }
     }
 
@@ -157,18 +164,22 @@ public class Choices : MonoBehaviour
         _choicesCount++;
     }
 
-    public void Debuga(int num)   //デバッグ用
+    public void Debuga()   //デバッグ用
     {
-        Debug.Log(_selectedChoices[num] + _score);
+        StartCoroutine(GoodEffect());
     }
 
-    IEnumerator Correct()
+    IEnumerator GoodEffect()
     {
-        float timer = 0;
-        while (timer>= _effectTime)
-        {
-            yield return null;
-            timer += Time.deltaTime;
-        }
+        _goodEffect.SetActive(true);
+        yield return new WaitForSeconds(_effectTime);
+        _goodEffect.SetActive(false);
+    }
+
+    IEnumerator BadEffect()
+    {
+        _badEffect.SetActive(true);
+        yield return new WaitForSeconds(_effectTime);
+        _badEffect.SetActive(false);
     }
 }
