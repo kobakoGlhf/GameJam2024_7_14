@@ -26,7 +26,7 @@ public class TalkText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
         if (_index == 3 && !_isFirst)
         {
             _text.text = "（なんてコメントしようかな？？）";
@@ -77,8 +77,11 @@ public class TalkText : MonoBehaviour
             _index++;
             _dialogue = StartCoroutine(Dialogue());
         }
-
-
+        //デバッグ用
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            TextHidden();
+        }
     }
     void TextHidden()
     {
@@ -86,14 +89,14 @@ public class TalkText : MonoBehaviour
         _text.gameObject.SetActive(false);
         _choices.ChoiceDisplay();
         _choices.TimerStart();
-        _choices._gameStart = true;
+        _choices._inGame = true;
     }
 
     public void TextActive()
     {
         _masseageBox.SetActive(true);
         _text.gameObject.SetActive(true);
-        _choices._gameStart = false;
+        _choices._inGame = false;
     }
 
     IEnumerator Dialogue() //1文字ずつ表示する

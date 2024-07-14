@@ -17,8 +17,9 @@ public class Choices : MonoBehaviour
     public string[] _selectedChoices = new string[8];
     public int _choicesCount;
     public static int _score;
-    public bool _gameStart;
+    public bool _inGame;//名前変更、ゲーム中かどうかのフラグ
     TalkText _talkText;
+    Coroutine _coroutineTimer;//null入れるよう
 
     private void Start()
     {
@@ -68,17 +69,28 @@ public class Choices : MonoBehaviour
 
     public void TimerStart()
     {
-        StartCoroutine(ChoicesTimer());
+        _coroutineTimer=StartCoroutine(ChoicesTimer());//fix
     }
     private void Update()
     {
-        if (_gameStart)
+        if (_inGame)
         {
             //Debug.Log(_choicesCount);
             if (Input.GetKeyDown(KeyCode.W))
             {
-                ChoiceW();
-                Debug.Log("W");
+                if ((_choicesCount + 1) % 3 != 0)
+                {
+                    ChoiceW();
+                    Debug.Log("W");
+                    Debug.Log((_choicesCount / 4 + 1) % 3);
+                }
+                else if (_selectedChoices[_choicesCount]=="")
+                {
+                    StopCoroutine(ChoicesTimer());
+                    _coroutineTimer = null;//fix コルーチンリセット
+                    _selectedChoices[_choicesCount] = _choices[_choicesCount * 4]; //選択肢を保存
+                    _choicesCount++; //カウントを増やす
+                }
             }
             else if (Input.GetKeyDown(KeyCode.A))
             {
@@ -100,9 +112,11 @@ public class Choices : MonoBehaviour
         if (_selectedChoices[_choicesCount] == "") //選択肢を選んでなかったら
         {
             StopCoroutine(ChoicesTimer());
+            _coroutineTimer = null;//fix コルーチンリセット
             _selectedChoices[_choicesCount] = _choices[_choicesCount * 4]; //選択肢を保存
             _choicesCount++; //カウントを増やす
             TextChange();
+            Debug.Log(_choicesCount);
         }
         else Debug.Log(_selectedChoices[_choicesCount]);
     }
@@ -184,9 +198,10 @@ public class Choices : MonoBehaviour
         }
     }
 
-    public IEnumerator ChoicesTimer()   //選択のタイマー
+    public IEnumerator ChoicesTimer()   //選択のタイマー //fix 挙動の修正
     {
         float timer = 0;
+        Debug.Log("コルーチンstart");
         while (timer <= _limitedTime)
         {
             if (_selectedChoices[_choicesCount] == "")
@@ -195,13 +210,15 @@ public class Choices : MonoBehaviour
             }
             else
             {
-                yield break;
+                //yield break;
+                break;//変更
             }
             timer += Time.deltaTime;
         }
         int _random = Random.Range(0, 3);
         _selectedChoices[_choicesCount] = _choices[_choicesCount * 4 + _random];
         _choicesCount++;
+        TextChange();
     }
 
     public void Debuga()   //デバッグ用
@@ -223,3 +240,4 @@ public class Choices : MonoBehaviour
         _badEffect.SetActive(false);
     }
 }
+//コルーチンのリセットには関数をnullにする必要があります。
