@@ -14,13 +14,15 @@ public class Choices : MonoBehaviour
     [SerializeField] GameObject _goodEffect;
     [SerializeField] GameObject _badEffect;
     [SerializeField] Slider _timeSlider;
-    string[] _selectedChoices = new string[8];
+    public string[] _selectedChoices = new string[8];
     public int _choicesCount;
     public static int _score;
     public bool _gameStart;
+    TalkText _talkText;
 
     private void Start()
     {
+        _talkText = GetComponent<TalkText>();
         _goodEffect.SetActive(false);
         _badEffect.SetActive(false);
     }
@@ -90,7 +92,6 @@ public class Choices : MonoBehaviour
             {
                 ChoicD();
             }
-            ChoiceDisplay();
         }
     }
     public void ChoiceW()　　//Wを検出したら起動
@@ -101,6 +102,7 @@ public class Choices : MonoBehaviour
             StopCoroutine(ChoicesTimer());
             _selectedChoices[_choicesCount] = _choices[_choicesCount * 4]; //選択肢を保存
             _choicesCount++; //カウントを増やす
+            TextChange();
         }
     }
 
@@ -111,6 +113,7 @@ public class Choices : MonoBehaviour
             _selectedChoices[_choicesCount] = _choices[_choicesCount * 4 + 1];
             StopCoroutine(ChoicesTimer());
             _choicesCount++;
+            TextChange();
         }
     }
 
@@ -121,6 +124,7 @@ public class Choices : MonoBehaviour
             _selectedChoices[_choicesCount] = _choices[_choicesCount * 4 + 2];
             StopCoroutine(ChoicesTimer());
             _choicesCount++;
+            TextChange();
         }
     }
 
@@ -131,7 +135,37 @@ public class Choices : MonoBehaviour
             _selectedChoices[_choicesCount] = _choices[_choicesCount * 4 + 3];
             StopCoroutine(ChoicesTimer());
             _choicesCount++;
+            TextChange();
         }
+    }
+
+    void TextChange()
+    {
+        if (_choicesCount == 3)
+        {
+            _talkText.enabled = true;
+            _talkText._text.text = "";
+            _talkText.TextActive();
+            enabled = false;
+        }
+        else if (_choicesCount == 6)
+        {
+            _talkText.enabled = true;
+            _talkText._text.text = "";
+            _talkText.TextActive();
+            enabled = false;
+        }
+        else if (_choicesCount == 8)
+        {
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+            {
+                _talkText.enabled = true;
+                _talkText._text.text = "";
+                _talkText.TextActive();
+                enabled = false;
+            }
+        }
+        ChoiceDisplay(); //表示を変更する
     }
 
     public void AddScore(int times, int correct1, int correct2, int correct3)   //スコア加算　正解のインデックスを入力してください
