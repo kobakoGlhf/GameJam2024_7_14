@@ -11,12 +11,25 @@ public class Choices : MonoBehaviour
     [SerializeField] Text _textA;
     [SerializeField] Text _textS;
     [SerializeField] Text _textD;
-    [SerializeField] float _effectTime;
+    [SerializeField] GameObject _goodEffect;
+    [SerializeField] GameObject _badEffect;
+    [SerializeField] Slider _timeSlider;
     string[] _selectedChoices = new string[8];
     public int _choicesCount;
     public static int _score;
     public bool _gameStart;
-    
+
+    private void Start()
+    {
+        //関数のリセット
+        for(int i=0; i<8; i++)
+        {
+            _selectedChoices[i] = null;
+        }
+        _choicesCount = 0;
+        _goodEffect.SetActive(false);
+        _badEffect.SetActive(false);
+    }
     public void ChoiceDisplay()
     {
         //選択肢を表示する
@@ -128,12 +141,17 @@ public class Choices : MonoBehaviour
     }
 
     public void AddScore(int times, int correct1, int correct2, int correct3)   //スコア加算　正解のインデックスを入力してください
-    {
+    {                                                        
         if (_selectedChoices[times * 3] == _choices[correct1]
             && _selectedChoices[times * 3 +1] == _choices[correct2] 
             && _selectedChoices[times * 3 + 2] == _choices[correct3])
         {
             _score++;
+            StartCoroutine(GoodEffect());
+        }
+        else
+        {
+            StartCoroutine(BadEffect());
         }
     }
 
@@ -157,18 +175,22 @@ public class Choices : MonoBehaviour
         _choicesCount++;
     }
 
-    public void Debuga(int num)   //デバッグ用
+    public void Debuga()   //デバッグ用
     {
-        Debug.Log(_selectedChoices[num] + _score);
+        StartCoroutine(GoodEffect());
     }
 
-    IEnumerator Correct()
+    IEnumerator GoodEffect()
     {
-        float timer = 0;
-        while (timer>= _effectTime)
-        {
-            yield return null;
-            timer += Time.deltaTime;
-        }
+        _goodEffect.SetActive(true);
+        yield return new WaitForSeconds(7f);
+        _goodEffect.SetActive(false);
+    }
+
+    IEnumerator BadEffect()
+    {
+        _badEffect.SetActive(true);
+        yield return new WaitForSeconds(7f);
+        _badEffect.SetActive(false);
     }
 }
