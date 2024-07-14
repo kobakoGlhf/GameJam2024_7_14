@@ -6,6 +6,7 @@ public class TalkText : MonoBehaviour
 {
     int _index = 0;
     string[] _words;
+    Choices _choices;
     [SerializeField] string[] _talk;
     [SerializeField] Text _text;
     [SerializeField] GameObject _masseageBox;
@@ -14,6 +15,7 @@ public class TalkText : MonoBehaviour
     void Start()
     {
         StartCoroutine(Dialogue());
+        _choices = GetComponent<Choices>();
     }
 
     // Update is called once per frame
@@ -48,5 +50,7 @@ public class TalkText : MonoBehaviour
         yield return new WaitForSeconds(3f);
         _masseageBox.SetActive(false);
         _text.gameObject.SetActive(false);
+        _choices.ChoiceDisplay();
+        _choices._gameStart = true;
     }
 }

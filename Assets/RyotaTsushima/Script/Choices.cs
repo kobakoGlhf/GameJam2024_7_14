@@ -15,6 +15,7 @@ public class Choices : MonoBehaviour
     string[] _selectedChoices = new string[8];
     int _choicesCount;
     public static int _score;
+    public bool _gameStart;
     
     public void ChoiceDisplay()
     {
@@ -56,14 +57,37 @@ public class Choices : MonoBehaviour
         }
         StartCoroutine(ChoicesTimer());
     }
-
+    private void Update()
+    {
+        if (_gameStart)
+        {
+            Debug.Log("GameStart");
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                ChoiceW();
+            }
+            else if (Input.GetKeyDown(KeyCode.A))
+            {
+                ChoiceA();
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                ChoiceS();
+            }
+            else if (Input.GetKeyDown(KeyCode.D))
+            {
+                ChoicD();
+            }
+        }
+    }
     public void ChoiceW()　　//Wを検出したら起動
     {
-        if (_selectedChoices[_choicesCount] == null)
+        Debug.Log("Input.W");
+        if (_selectedChoices[_choicesCount] == null) //選択肢を選んでなかったら
         {
-            _selectedChoices[_choicesCount] = _choices[_choicesCount * 4];
-            StopCoroutine(ChoicesTimer());
-            _choicesCount++;
+            StopCoroutine(ChoicesTimer()); 
+            _selectedChoices[_choicesCount] = _choices[_choicesCount * 4]; //選択肢を保存
+            _choicesCount++; //カウントを増やす
         }
     }
 
