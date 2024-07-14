@@ -23,7 +23,7 @@ public class Choices : MonoBehaviour
     private void Start()
     {
         _talkText = GetComponent<TalkText>();
-        _goodEffect.SetActive(false);
+        //_goodEffect.SetActive(false);
         _badEffect.SetActive(false);
     }
     public void ChoiceDisplay()
@@ -74,7 +74,7 @@ public class Choices : MonoBehaviour
     {
         if (_gameStart)
         {
-            Debug.Log(_choicesCount);
+            //Debug.Log(_choicesCount);
             if (Input.GetKeyDown(KeyCode.W))
             {
                 ChoiceW();
@@ -97,18 +97,19 @@ public class Choices : MonoBehaviour
     public void ChoiceW()　　//Wを検出したら起動
     {
         Debug.Log("Input.W");
-        if (_selectedChoices[_choicesCount] == null) //選択肢を選んでなかったら
+        if (_selectedChoices[_choicesCount] == "") //選択肢を選んでなかったら
         {
             StopCoroutine(ChoicesTimer());
             _selectedChoices[_choicesCount] = _choices[_choicesCount * 4]; //選択肢を保存
             _choicesCount++; //カウントを増やす
             TextChange();
         }
+        else Debug.Log(_selectedChoices[_choicesCount]);
     }
 
     public void ChoiceA()　　//Aを検出したら起動
     {
-        if (_selectedChoices[_choicesCount] == null)
+        if (_selectedChoices[_choicesCount] == "")
         {
             _selectedChoices[_choicesCount] = _choices[_choicesCount * 4 + 1];
             StopCoroutine(ChoicesTimer());
@@ -119,7 +120,7 @@ public class Choices : MonoBehaviour
 
     public void ChoiceS()　　//Sを検出したら起動
     {
-        if (_selectedChoices[_choicesCount] == null)
+        if (_selectedChoices[_choicesCount] == "")
         {
             _selectedChoices[_choicesCount] = _choices[_choicesCount * 4 + 2];
             StopCoroutine(ChoicesTimer());
@@ -130,7 +131,7 @@ public class Choices : MonoBehaviour
 
     public void ChoicD()　　//Dを検出したら起動
     {
-        if (_selectedChoices[_choicesCount] == null)
+        if (_selectedChoices[_choicesCount] == "")
         {
             _selectedChoices[_choicesCount] = _choices[_choicesCount * 4 + 3];
             StopCoroutine(ChoicesTimer());
@@ -188,7 +189,7 @@ public class Choices : MonoBehaviour
         float timer = 0;
         while (timer <= _limitedTime)
         {
-            if (_selectedChoices[_choicesCount] == null)
+            if (_selectedChoices[_choicesCount] == "")
             {
                 yield return null;
             }
