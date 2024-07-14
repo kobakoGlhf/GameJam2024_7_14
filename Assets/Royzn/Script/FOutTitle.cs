@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class FOutTitle : MonoBehaviour
 {
+    public Button _returnTitle;
     public GameObject targetObject;
 
     public void ShowObject()
@@ -25,6 +26,10 @@ public class FOutTitle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _returnTitle.onClick.Invoke();
+        }
         
     }
 }

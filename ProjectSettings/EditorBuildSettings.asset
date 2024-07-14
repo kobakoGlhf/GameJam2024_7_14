@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Royzn/SampleScenes/Title.unity
+    guid: 60da0777175da6e47955d2b69e32d9d1
+  - enabled: 1
+    path: Assets/Royzn/ResultScene.unity
+    guid: c36d16c79e6098541a89e2db9a5d55f8
   m_configObjects: {}
