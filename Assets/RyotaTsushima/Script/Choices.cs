@@ -13,7 +13,12 @@ public class Choices : MonoBehaviour
     [SerializeField] Text _textD;
     [SerializeField] GameObject _goodEffect;
     [SerializeField] GameObject _badEffect;
+<<<<<<< HEAD
     public string[] _selectedChoices = new string[8];
+=======
+    [SerializeField] Slider _timeSlider;
+    string[] _selectedChoices = new string[8];
+>>>>>>> 59674fad753b8abaf365fc8c9dca6c628eb547c5
     public int _choicesCount;
     public static int _score;
     public bool _gameStart;
@@ -21,9 +26,14 @@ public class Choices : MonoBehaviour
 
     private void Start()
     {
+<<<<<<< HEAD
         _talkText = GetComponent<TalkText>();
 
         for(int i=0; i<=8; i++)
+=======
+        //ŠÖ”‚ÌƒŠƒZƒbƒg
+        for(int i=0; i<8; i++)
+>>>>>>> 59674fad753b8abaf365fc8c9dca6c628eb547c5
         {
             _selectedChoices[i] = null;
         }
