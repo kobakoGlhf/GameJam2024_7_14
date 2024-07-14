@@ -51,6 +51,8 @@ public class TalkText : MonoBehaviour
         _masseageBox.SetActive(false);
         _text.gameObject.SetActive(false);
         _choices.ChoiceDisplay();
+        _choices.TimerStart();
         _choices._gameStart = true;
+        yield break;
     }
 }

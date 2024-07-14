@@ -19,7 +19,7 @@ public class Choices : MonoBehaviour
     
     public void ChoiceDisplay()
     {
-        //選択肢を表示する &　タイマー起動
+        //選択肢を表示する
         if(_textW != null)
         {
             _textW.text = _choices[_choicesCount * 4];
@@ -55,6 +55,10 @@ public class Choices : MonoBehaviour
         {
             Debug.Log("Dに対応する選択肢がありません");
         }
+    }
+
+    public void TimerStart()
+    {
         StartCoroutine(ChoicesTimer());
     }
     private void Update()
@@ -78,6 +82,7 @@ public class Choices : MonoBehaviour
             {
                 ChoicD();
             }
+            ChoiceDisplay();
         }
     }
     public void ChoiceW()　　//Wを検出したら起動
@@ -85,7 +90,7 @@ public class Choices : MonoBehaviour
         Debug.Log("Input.W");
         if (_selectedChoices[_choicesCount] == null) //選択肢を選んでなかったら
         {
-            StopCoroutine(ChoicesTimer()); 
+            StopCoroutine(ChoicesTimer());
             _selectedChoices[_choicesCount] = _choices[_choicesCount * 4]; //選択肢を保存
             _choicesCount++; //カウントを増やす
         }
