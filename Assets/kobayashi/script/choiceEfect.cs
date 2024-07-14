@@ -7,21 +7,21 @@ public class ChoiceEfect : MonoBehaviour
 {
     //[SerializeField] Choices _choices;
     [SerializeField] Image _panel;
-    [SerializeField] GameObject _textObject;
-    Text _text;
-    private void Start()
+    [SerializeField] Text _text;
+    public void AnimationPlay(string choicesString)
     {
-        _text = _textObject.GetComponent<Text>();
-    }
-    public void AnimationPlay()
-    {
+        _panel.gameObject.SetActive(true);
+        _text.gameObject.SetActive(true);
+        _text.text = choicesString;
         _panel.GetComponent<Animator>().Play("PanelFadeIn");
-        _textObject.GetComponent<Animator>().Play("TextFadeIn");
+        _text.GetComponent<Animator>().Play("TextFadeIn");
 
     }
-    public void AnimationReset()
+    public void AnimationReset()//アニメーションイベントで呼んでる
     {
         _panel.color = new Color(default, default, default, 0);
         _text.color= new Color(default, default, default, 0);
+        _panel.gameObject.SetActive(false);
+        _text.gameObject.SetActive(false);
     }
 }

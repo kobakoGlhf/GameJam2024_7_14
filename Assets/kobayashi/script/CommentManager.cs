@@ -7,35 +7,49 @@ using UnityEngine.UI;
 
 public class CommentManager : MonoBehaviour
 {
-    [SerializeField,Range(200,1000)] float _commentSpeed;
     [SerializeField,Tooltip("コメントのプレハブ")] GameObject _commentTextObject;
-    [SerializeField,Tooltip("生成位置")] RectTransform _poitionAnchor;
+    [SerializeField,Tooltip("生成位置")] RectTransform _poitionAnchor;//コメント位置
     [SerializeField]string[] _commentText;
-    bool _inGame;
-    public List<GameObject> _creatObject=new List<GameObject>();
+    [SerializeField, Range(200, 1000)] float _commentSpeed;
+    [SerializeField] float _createSpeedOrigin;
+    float _createSpeed;
+    Choices _choices;
+    List<GameObject> _creatObject=new List<GameObject>();
     float _timer;
+    private void Start()
+    {
+        //_choices = GameObject.FindObjectOfType<Choices>().GetComponent<Choices>();
+        _createSpeed=Random.Range(_createSpeedOrigin,_createSpeedOrigin+1);
+    }
     private void Update()
     {
-        _timer= Time.deltaTime;
-
+        _timer += Time.deltaTime;
+        if (_timer > _createSpeed)//&&!_choices._inGame)
+        {
+            CreatComment();
+            _timer = 0;
+            _createSpeed = Random.Range(_createSpeedOrigin, _createSpeedOrigin + 1);
+        }
     }
     public void CreatComment()
     {
+        Debug.Log("aaa");
         bool kasu=false;
         int i = Random.Range(0, _commentText.Length);
         GameObject creatObject = Instantiate(_commentTextObject, _poitionAnchor.transform);
+        //階段状にコメントが表示されるようにする部分
         if (_creatObject.Count == 0)
         {
-            Debug.Log("aaa");
             kasu = true;
         }
         _creatObject.Add(creatObject);
         Debug.Log(_creatObject.Count);
         float creatObjectY = _creatObject.Count * -50;
         RectTransform rectTransform = creatObject.GetComponent<RectTransform>();
-        creatObject.GetComponent<Text>().text=_commentText[i];
-        rectTransform.anchoredPosition = new Vector2(_poitionAnchor.anchoredPosition.x,_poitionAnchor.anchoredPosition.y+ creatObjectY);
-        StartCoroutine(CommentMove(creatObject,kasu));
+        rectTransform.anchoredPosition = new Vector2(_poitionAnchor.anchoredPosition.x,_poitionAnchor.anchoredPosition.y+ creatObjectY);//初期位置
+        
+        creatObject.GetComponent<Text>().text = _commentText[i];//コメントの中身変更
+        StartCoroutine(CommentMove(creatObject,kasu));//コメントを動かす部分
     }
     IEnumerator CommentMove(GameObject gameObject,bool kasu)
     {
