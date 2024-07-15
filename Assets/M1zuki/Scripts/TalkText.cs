@@ -71,7 +71,7 @@ public class TalkText : MonoBehaviour
         }
 
         //スペースを押したら進む
-        if (Input.GetKeyDown(KeyCode.Space) && _dialogue == null)
+        if (Input.GetKeyDown(KeyCode.Space) && _dialogue == null&&_index!=9)
         {
             _text.text = "";
             _index++;
