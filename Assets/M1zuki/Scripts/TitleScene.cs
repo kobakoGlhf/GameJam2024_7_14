@@ -7,6 +7,8 @@ public class TitleScene : MonoBehaviour
     [SerializeField] GameObject _bgmObj;
     SwitchScenes _scenes;
     int _index;
+    public GameObject _creditImage;
+    private bool _imageDisplayed = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,18 +22,22 @@ public class TitleScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (!_imageDisplayed)
         {
-            _text[0].color = Color.red;
-            _text[1].color = Color.white;
-            _index = 0;
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                _text[0].color = Color.red;
+                _text[1].color = Color.white;
+                _index = 0;
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                _text[1].color = Color.red;
+                _text[0].color = Color.white;
+                _index = 1;
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            _text[1].color = Color.red;
-            _text[0].color = Color.white;
-            _index = 1;
-        }
+        
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -41,8 +47,14 @@ public class TitleScene : MonoBehaviour
             }
             if(_index == 1)
             {
-                //クレジット表示
+                ToggleImageDisplay();
             }
+        }
+
+        void ToggleImageDisplay()
+        {
+            _imageDisplayed = !_imageDisplayed;
+            _creditImage.SetActive(_imageDisplayed);
         }
     }
 }
