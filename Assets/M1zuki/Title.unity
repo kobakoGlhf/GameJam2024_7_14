@@ -1090,7 +1090,7 @@ MonoBehaviour:
   _bgmObj: {fileID: 1489068768}
   _creditImage: {fileID: 1095624104}
   _seObj: {fileID: 1279298622}
-  _cursor: {fileID: 8300000, guid: ad1cfc3014e72cf4c812b5fb47bc22ac, type: 3}
+  _cursor: {fileID: 8300000, guid: 752593bc8a2e8dc439bced4c3e6311fa, type: 3}
   _determination: {fileID: 8300000, guid: 36cdd558b0ddc4e45a63701bf9f39728, type: 3}
 --- !u!4 &1842940227
 Transform:
