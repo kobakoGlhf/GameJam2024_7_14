@@ -15,7 +15,7 @@ public class Choices : MonoBehaviour
     [SerializeField] Slider _timeSlider;
     Score _score;
     [SerializeField] ChoiceEffect _choiceEffect;
-    [HideInInspector] public string[] _selectedChoices = new string[9];
+    public string[] _selectedChoices = new string[9];
     public int _choicesCount;
     public bool _inGame;//名前変更、ゲーム中かどうかのフラグ
     [SerializeField] public GameObject _question;
