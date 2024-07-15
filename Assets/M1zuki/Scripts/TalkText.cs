@@ -94,6 +94,7 @@ public class TalkText : MonoBehaviour
         _choices.ChoiceDisplay();
         _choices.TimerStart();
         _choices._inGame = true;
+        _choices._question.SetActive(true);
     }
 
     public void TextActive()

@@ -15,9 +15,10 @@ public class Choices : MonoBehaviour
     [SerializeField] Slider _timeSlider;
     Score _score;
     [SerializeField] ChoiceEffect _choiceEffect;
-    [HideInInspector]public string[] _selectedChoices = new string[8];
+    [HideInInspector] public string[] _selectedChoices = new string[9];
     public int _choicesCount;
     public bool _inGame;//名前変更、ゲーム中かどうかのフラグ
+    [SerializeField] public GameObject _question;
     TalkText _talkText;
 
     Coroutine _coroutineTimer;//null入れるよう
@@ -26,6 +27,7 @@ public class Choices : MonoBehaviour
     {
         _score=GameObject.FindObjectOfType<Score>();
         _talkText = GetComponent<TalkText>();
+        _question.gameObject.SetActive(false);
         //_goodEffect.SetActive(false);
         //_badEffect.SetActive(false);
     }
@@ -160,6 +162,7 @@ public class Choices : MonoBehaviour
             _talkText.enabled = true;
             _talkText._text.text = "";
             _talkText.TextActive();
+            _question.gameObject.SetActive(false);
             enabled = false;
             _score.AddScore(0, 0, 4, 8);
             _score.AddScore(0, 1, 5, 9);
@@ -173,11 +176,13 @@ public class Choices : MonoBehaviour
             _talkText.enabled = true;
             _talkText._text.text = "";
             _talkText.TextActive();
+            _question.gameObject.SetActive(false);
             enabled = false;
             _score.AddScore(1, 12, 16, 20);
             _score.AddScore(1, 13, 17, 21);
             _score.AddScore(1, 14, 18, 22);
             _score.AddScore(1, 15, 19, 23);
+            _choiceEffect.AnimationPlay(_selectedChoices[1 * 3] + _selectedChoices[1 * 3 + 1] + _selectedChoices[1 * 3 + 2]);
         }
         else if (_choicesCount == 9)
         {
@@ -186,11 +191,13 @@ public class Choices : MonoBehaviour
                 _talkText.enabled = true;
                 _talkText._text.text = "";
                 _talkText.TextActive();
+                _question.gameObject.SetActive(false);
                 enabled = false;
                 _score.AddScore(2, 24, 28, 32);
                 _score.AddScore(2, 25, 29, 33);
                 _score.AddScore(2, 26, 30, 34);
                 _score.AddScore(2, 27, 31, 35);
+                _choiceEffect.AnimationPlay(_selectedChoices[1 * 3] + _selectedChoices[1 * 3 + 1] + _selectedChoices[1 * 3 + 2]);
                 Debug.Log("ゲーム部分終了");
             }
         }
@@ -198,8 +205,8 @@ public class Choices : MonoBehaviour
         {
             _coroutineTimer = StartCoroutine(ChoicesTimer());
             ChoiceDisplay(); //表示を変更する
+            Debug.Log(_choicesCount);
         }
-        Debug.Log(_choicesCount);
     }
 
 
@@ -232,7 +239,7 @@ public class Choices : MonoBehaviour
     {
         StartCoroutine(GoodEffect());
     }
-
+    
     IEnumerator GoodEffect()
     {
         _goodEffect.SetActive(true);
