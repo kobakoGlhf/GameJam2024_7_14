@@ -18,18 +18,22 @@ public class CommentManager : MonoBehaviour
     float _timer;
     private void Start()
     {
-        //_choices = GameObject.FindObjectOfType<Choices>().GetComponent<Choices>();
+        _choices = GameObject.FindObjectOfType<Choices>();
+        Debug.Log(_choices);
         //_createSpeed=Random.Range(_createSpeedOrigin,_createSpeedOrigin+1);
         _createSpeed = _createSpeedOrigin;
     }
     private void Update()
     {
-        _timer += Time.deltaTime;
-        if (_timer > _createSpeed)//&&!_choices._inGame)
+        if (_choices._inGame==false)
         {
-            CreatComment();
-            _timer = 0;
-            //_createSpeed = Random.Range(_createSpeedOrigin, _createSpeedOrigin + 1);
+            _timer += Time.deltaTime;
+            if (_timer > _createSpeed)//&&!_choices._inGame)
+            {
+                CreatComment();
+                _timer = 0;
+                //_createSpeed = Random.Range(_createSpeedOrigin, _createSpeedOrigin + 1);
+            }
         }
     }
     public void CreatComment()
