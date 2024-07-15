@@ -37,7 +37,7 @@ public class Score : MonoBehaviour
             {
                 _subscribers = 1000000;
             }
-            _subscribersUi._count = _subscribers;
+            //_subscribersUi._count = _subscribers;
             Debug.Log("ƒXƒRƒA‚ðŽó‚¯Žæ‚è‚Ü‚µ‚½");
             Debug.Log("Score:" + _score);
         }

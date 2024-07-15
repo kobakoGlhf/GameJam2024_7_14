@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UiTimeLimit : MonoBehaviour
 {
     [SerializeField] Image _circle;
-    Text _text;
+    [SerializeField] Text _text;
 
     [SerializeField] float _currentTime = 1.0f;
     [SerializeField] float _maxTime = 3.0f;
@@ -60,8 +60,6 @@ public class UiTimeLimit : MonoBehaviour
         GameObject obj;
         obj = Instantiate(this.gameObject, pos, Quaternion.identity, canvas.transform); //インスタンス作成
         //設定項目
-        GameObject textObj= obj.transform.GetChild(0).gameObject;
-        _text=textObj.GetComponent<Text>();
         obj.SetActive(true); //有効にする
         UiTimeLimit uiTimeLimit = obj.GetComponent<UiTimeLimit>();
         uiTimeLimit._isInstantiate = true; //インスタンスモード
