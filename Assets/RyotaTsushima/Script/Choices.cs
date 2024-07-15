@@ -14,7 +14,8 @@ public class Choices : MonoBehaviour
     [SerializeField] GameObject _badEffect;
     [SerializeField] Slider _timeSlider;
     Score _score;
-    public string[] _selectedChoices = new string[8];
+    [SerializeField] ChoiceEffect _choiceEffect;
+    [HideInInspector]public string[] _selectedChoices = new string[8];
     public int _choicesCount;
     public bool _inGame;//名前変更、ゲーム中かどうかのフラグ
     TalkText _talkText;
@@ -164,6 +165,8 @@ public class Choices : MonoBehaviour
             _score.AddScore(0, 1, 5, 9);
             _score.AddScore(0, 2, 6, 10);
             _score.AddScore(0, 3, 7, 11);
+            _choiceEffect.AnimationPlay(_selectedChoices[0*3]+ _selectedChoices[0 * 3+1]+ _selectedChoices[0 * 3+2]);
+            Debug.Log("aaa");
         }
         else if (_choicesCount == 6)
         {
