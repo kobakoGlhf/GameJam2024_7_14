@@ -3,12 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class CharaPic : MonoBehaviour
 {
-    public static int _charaNam = 0;
+    public static int _charaNam = 0; //選択したキャラの番号
     bool _isFirst = false;
     [SerializeField] GameObject _fadePanel;
     GameObject _bgmObj;
     Animator _bgmAnimator;
     [SerializeField] int _changeSceneWaitTime = 2;
+    [SerializeField,Tooltip("キャラ1シーン")] string _sceneName0;
+    [SerializeField, Tooltip("キャラ2シーン")] string _sceneName1;
+    [SerializeField, Tooltip("キャラ3シーン")] string _sceneName2;
 
     // Start is called before the first frame update
     void Start()
@@ -33,31 +36,41 @@ public class CharaPic : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.A))
             {
                 _charaNam = 0;
-                NextScene();
+                NextScene("SceneChange0");
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
                 _charaNam = 1;
-                NextScene();
+                NextScene("SceneChange1");
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
                 _charaNam = 2;
-                NextScene();
+                NextScene("SceneChange2");
             }
         }
     }
-    void NextScene()
+    void NextScene(string methodName)
     {
         _fadePanel.SetActive(true);
         _isFirst = true;
         _bgmAnimator.enabled = true;
-        Invoke("SceneChange", _changeSceneWaitTime);
+        Invoke(methodName, _changeSceneWaitTime);
     }
 
-    void SceneChange()
+    void SceneChange0()
     {
         Destroy(_bgmObj);
-        SceneManager.LoadScene("TestScene_Mizuki");
+        SceneManager.LoadScene(_sceneName0);
+    }
+    void SceneChange1()
+    {
+        Destroy(_bgmObj);
+        SceneManager.LoadScene(_sceneName1);
+    }
+    void SceneChange2()
+    {
+        Destroy(_bgmObj);
+        SceneManager.LoadScene(_sceneName2);
     }
 }

@@ -1,0 +1,153 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8869218836123479501
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7068543250853198446}
+  - component: {fileID: 2272683033223929492}
+  - component: {fileID: 6121816790500498069}
+  - component: {fileID: 7422096944629812626}
+  m_Layer: 0
+  m_Name: GameManager3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7068543250853198446
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8869218836123479501}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.665454, y: -19.22845, z: -9.586149}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2272683033223929492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8869218836123479501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7a6d7c3b58c6fb40bda79b11bd378fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _charaSprites:
+  - {fileID: 21300000, guid: cb41132bfd973be4b94f9d7221538e17, type: 3}
+  - {fileID: 21300000, guid: 08a3c6ec61f1b7740a273ac68c6883b9, type: 3}
+  - {fileID: 21300000, guid: 4d07608cfc310cc4095e67442a8d5b2a, type: 3}
+  _spriteRenderer: {fileID: 0}
+--- !u!114 &6121816790500498069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8869218836123479501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51e72cef7a0f53548add31bc156f8b63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _index: 0
+  _talk:
+  - "\u307F \u306A \u3055 \u3093 \u3053 \u3093 \u306B \u3061 \u306F \uFF5E"
+  - "\u3053 \u308C \u304B \u3089 \u96D1 \u8AC7 \u914D \u4FE1 \u3092 \u3084 \u3063
+    \u3066 \u3044 \u304F \u3088 \uFF5E"
+  - "\u30B3 \u30E1 \u30F3 \u30C8 \u3042 \u308A \u304C \u3068 \uFF5E \u300C \u30E9
+    \u30DC \u3061 \u3083 \u3093 \u306F \u4ECA \u65E5 \u4F55 \u98DF \u3079 \u305F
+    \uFF1F \u300D"
+  - "\uFF08\u306A\u3093\u3066\u30B3\u30E1\u30F3\u30C8\u3057\u3088\u3046\u304B\u306A\uFF1F\uFF1F\uFF09"
+  - "\u30B3 \u30E1 \u30F3 \u30C8 \u3042 \u308A \u304C \u3068 \uFF5E \u300C \u30E9
+    \u30DC \u3061 \u3083 \u3093 \u306F \u4ECA \u65E5 \u4F55 \u3057 \u3066 \u305F
+    \uFF1F \u300D"
+  - "\uFF08\u306A\u3093\u3066\u30B3\u30E1\u30F3\u30C8\u3057\u3088\u3046\u304B\u306A\uFF1F\uFF1F\uFF09"
+  - "\u30B3 \u30E1 \u30F3 \u30C8 \u3042 \u308A \u304C \u3068 \uFF5E \u300C \u3007
+    \u3007 \u3061 \u3083 \u3093 \u306F \u4F55 \u304C \u597D \u304D \uFF1F \u300D"
+  - "\uFF08\u306A\u3093\u3066\u30B3\u30E1\u30F3\u30C8\u3057\u3088\u3046\u304B\u306A\uFF1F\uFF1F\uFF09"
+  - "\u4ECA \u65E5 \u306E \u914D \u4FE1 \u306F \u3053 \u3053 \u307E \u3067"
+  - "\u307E \u305F \u898B \u306B \u6765 \u3066 \u306D \uFF5E"
+  _text: {fileID: 0}
+  _masseageBox: {fileID: 0}
+--- !u!114 &7422096944629812626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8869218836123479501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc0214a6efa336340b54f6e29d844eab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _limitedTime: 3
+  _choices:
+  - "\u308F\u305F\u3057\u306F"
+  - "\u30E9\u30FC\u30E1\u30F3\u4E8C\u90CE"
+  - "\u713C\u8089\u3092"
+  - "\u30D6\u30F3\u30D6\u30F3"
+  - "\u30B1\u30FC\u30AD\u3092"
+  - "\u3057\u304B"
+  - "\u4ED6\u4EBA\u306E\u91D1\u3067"
+  - "\u30CF\u30ED\u30FC"
+  - "\u98DF\u3079\u305F\u3088"
+  - "\u52DD\u305F\u3093"
+  - "\u98DF\u3079\u305F\u3044"
+  - G-Tube
+  - "G-Tube\u3067"
+  - "1\u65E5\u4E2D"
+  - "\u53CB\u9054\u3068"
+  - "\u5168\u96C6\u4E2D\uFF01"
+  - "\u914D\u4FE1\u3092"
+  - "\u304A\u4ED5\u4E8B\u3067"
+  - "\u30D1\u30C1\u30F3\u30B3\u306B"
+  - "\u6C34\u306E\u547C\u5438"
+  - "\u3057\u3066\u305F\u3088"
+  - "\u5FD9\u3057\u304B\u3063\u305F\uFF01"
+  - "\u306B\u884C\u3063\u305F\u3088"
+  - "\u62FE\u306E\u578B\uFF01"
+  - "\u308F\u305F\u3057\u306F"
+  - "\u597D\u304D\u306A\u3082\u306E\u306F"
+  - "\u8AE6\u3081\u305F\u3089"
+  - "\u9152\uFF01"
+  - "\u307F\u3093\u306A\u306E\u3053\u3068\u304C"
+  - "\u25CB\u25CB\u3068"
+  - "\u305D\u3053\u3067\u8A66\u5408"
+  - "\u91D1\uFF01"
+  - "\u5927\u597D\u304D\u3060\u3088"
+  - "\u25CB\u25CB\u3060\u3088"
+  - "\u7D42\u4E86\u3067\u3059\u3088"
+  - "\u5F7C\u6C0F\uFF01"
+  _textW: {fileID: 0}
+  _textA: {fileID: 0}
+  _textS: {fileID: 0}
+  _textD: {fileID: 0}
+  _goodEffect: {fileID: 0}
+  _badEffect: {fileID: 0}
+  _timeSlider: {fileID: 0}
+  _selectedChoices:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  _choicesCount: 0
+  _inGame: 0
