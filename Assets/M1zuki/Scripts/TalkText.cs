@@ -14,11 +14,14 @@ public class TalkText : MonoBehaviour
     [SerializeField] string[] _talk;
     public Text _text;
     [SerializeField] GameObject _masseageBox;
+    [SerializeField] SEObj _seObj;
+    [SerializeField,Tooltip("テキストのカタカタ音")] AudioClip _textSeClip;
     Coroutine _dialogue;
 
     // Start is called before the first frame update
     void Start()
     {
+        _seObj.PlaySe(_textSeClip);
         _dialogue = StartCoroutine("Dialogue");
         _choices = GetComponent<Choices>();
     }
@@ -73,6 +76,7 @@ public class TalkText : MonoBehaviour
         //スペースを押したら進む
         if (Input.GetKeyDown(KeyCode.Space) && _dialogue == null&&_index!=9)
         {
+            _seObj.PlaySe(_textSeClip); //SE鳴らすところ
             _text.text = "";
             _index++;
             _dialogue = StartCoroutine(Dialogue());

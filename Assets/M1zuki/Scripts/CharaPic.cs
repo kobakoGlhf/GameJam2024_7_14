@@ -9,9 +9,11 @@ public class CharaPic : MonoBehaviour
     GameObject _bgmObj;
     Animator _bgmAnimator;
     [SerializeField] int _changeSceneWaitTime = 2;
+    [SerializeField] SEObj _seObj;
     [SerializeField,Tooltip("キャラ1シーン")] string _sceneName0;
     [SerializeField, Tooltip("キャラ2シーン")] string _sceneName1;
     [SerializeField, Tooltip("キャラ3シーン")] string _sceneName2;
+    [SerializeField, Tooltip("SEのクリップ")] AudioClip _clip;
 
     // Start is called before the first frame update
     void Start()
@@ -52,10 +54,11 @@ public class CharaPic : MonoBehaviour
     }
     void NextScene(string methodName)
     {
+        _seObj.PlaySe(_clip);
         _fadePanel.SetActive(true);
-        _isFirst = true;
         _bgmAnimator.enabled = true;
         Invoke(methodName, _changeSceneWaitTime);
+        _isFirst = true;
     }
 
     void SceneChange0()
