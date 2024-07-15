@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Choices : MonoBehaviour
 {
     [SerializeField, Tooltip("一回あたりの制限時間")] float _limitedTime;
-    [SerializeField, Tooltip("選択肢")] string[] _choices;
+    [SerializeField, Tooltip("選択肢")] public string[] _choices;
     [SerializeField] Text _textW;
     [SerializeField] Text _textA;
     [SerializeField] Text _textS;
@@ -78,67 +78,78 @@ public class Choices : MonoBehaviour
             //Debug.Log(_choicesCount);
             if (Input.GetKeyDown(KeyCode.W))
             {
-                ChoiceW();
+                ChoiceButton(0);
             }
             else if (Input.GetKeyDown(KeyCode.A))
             {
-                ChoiceA();
+                ChoiceButton(1);
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
-                ChoiceS();
+                ChoiceButton(2);
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
-                ChoicD();
+                ChoiceButton(3);
             }
         }
     }
-    public void ChoiceW()　　//Wを検出したら起動
+    public void ChoiceButton(int sum)
     {
-        Debug.Log("Input.W");
         if (_selectedChoices[_choicesCount] == "") //選択肢を選んでなかったら
         {
             StopCoroutine(ChoicesTimer());
             _coroutineTimer = null;//fix コルーチンリセット
-            _selectedChoices[_choicesCount] = _choices[_choicesCount * 4]; //選択肢を保存
+            _selectedChoices[_choicesCount] = _choices[_choicesCount * 4+sum]; //選択肢を保存
             _choicesCount++; //カウントを増やす
             TextChange();
         }
     }
+    //public void ChoiceW()　　//Wを検出したら起動
+    //{
+    //    Debug.Log("Input.W");
+    //    if (_selectedChoices[_choicesCount] == "") //選択肢を選んでなかったら
+    //    {
+    //        StopCoroutine(ChoicesTimer());
+    //        _coroutineTimer = null;//fix コルーチンリセット
+    //        _selectedChoices[_choicesCount] = _choices[_choicesCount * 4]; //選択肢を保存
+    //        _choicesCount++; //カウントを増やす
+    //        TextChange();
+    //    }
+    //}
 
-    public void ChoiceA()　　//Aを検出したら起動
-    {
-        if (_selectedChoices[_choicesCount] == "")
-        {
-            _selectedChoices[_choicesCount] = _choices[_choicesCount * 4 + 1];
-            StopCoroutine(ChoicesTimer());
-            _choicesCount++;
-            TextChange();
-        }
-    }
+    //public void ChoiceA()　　//Aを検出したら起動
+    //{
+    //    if (_selectedChoices[_choicesCount] == "")
+    //    {
+    //        _selectedChoices[_choicesCount] = _choices[_choicesCount * 4 + 1];
+    //        StopCoroutine(ChoicesTimer());
+    //        _choicesCount++;
+    //        TextChange();
+    //    }
+    //}
 
-    public void ChoiceS()　　//Sを検出したら起動
-    {
-        if (_selectedChoices[_choicesCount] == "")
-        {
-            _selectedChoices[_choicesCount] = _choices[_choicesCount * 4 + 2];
-            StopCoroutine(ChoicesTimer());
-            _choicesCount++;
-            TextChange();
-        }
-    }
+    //public void ChoiceS()　　//Sを検出したら起動
+    //{
+    //    if (_selectedChoices[_choicesCount] == "")
+    //    {
+    //        _selectedChoices[_choicesCount] = _choices[_choicesCount * 4 + 2];
+    //        StopCoroutine(ChoicesTimer());
+    //        _choicesCount++;
+    //        TextChange();
+    //    }
+    //}
 
-    public void ChoicD()　　//Dを検出したら起動
-    {
-        if (_selectedChoices[_choicesCount] == "")
-        {
-            _selectedChoices[_choicesCount] = _choices[_choicesCount * 4 + 3];
-            StopCoroutine(ChoicesTimer());
-            _choicesCount++;
-            TextChange();
-        }
-    }
+    //public void ChoicD()　　//Dを検出したら起動
+    //{
+    //    if (_selectedChoices[_choicesCount] == "")
+    //    {
+    //        _selectedChoices[_choicesCount] = _choices[_choicesCount * 4 + 3];
+    //        StopCoroutine(ChoicesTimer());
+    //        _choicesCount++;
+    //        TextChange();
+    //    }
+    //}
 
     void TextChange()
     {
@@ -166,23 +177,13 @@ public class Choices : MonoBehaviour
                 enabled = false;
             }
         }
+        else
+        {
+
+        }
         ChoiceDisplay(); //表示を変更する
     }
 
-    public void AddScore(int times, int correct1, int correct2, int correct3)   //スコア加算　正解のインデックスを入力してください
-    {
-        if (_selectedChoices[times * 3] == _choices[correct1]
-            && _selectedChoices[times * 3 + 1] == _choices[correct2]
-            && _selectedChoices[times * 3 + 2] == _choices[correct3])
-        {
-            _score++;
-            StartCoroutine(GoodEffect());
-        }
-        else
-        {
-            StartCoroutine(BadEffect());
-        }
-    }
 
     public IEnumerator ChoicesTimer()   //選択のタイマー //fix 挙動の修正
     {
