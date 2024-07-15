@@ -39,6 +39,10 @@ public class TitleScene : MonoBehaviour
             {
                 _scenes.ChangeScene();
             }
+            if(_index == 1)
+            {
+                //クレジット表示
+            }
         }
     }
 }
