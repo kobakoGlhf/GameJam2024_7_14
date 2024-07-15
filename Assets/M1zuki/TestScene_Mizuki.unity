@@ -1905,7 +1905,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1876579694}
-  - component: {fileID: 1876579696}
   - component: {fileID: 1876579695}
   - component: {fileID: 1876579697}
   - component: {fileID: 1876579698}
@@ -1968,23 +1967,6 @@ MonoBehaviour:
   _masseageBox: {fileID: 203487594}
   _seObj: {fileID: 74184401}
   _textSeClip: {fileID: 8300000, guid: 9ba593ef7f167254db087a23d1270a6d, type: 3}
---- !u!114 &1876579696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1876579693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7a6d7c3b58c6fb40bda79b11bd378fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _charaSprites:
-  - {fileID: 21300000, guid: edf8dc9a6b2579643988aceb85b33c36, type: 3}
-  - {fileID: 21300000, guid: 25d3a0f5a3483344294d72cfd25e9ea7, type: 3}
-  - {fileID: 21300000, guid: 2bd38d703bf1623488d002c4f3619cee, type: 3}
-  _spriteRenderer: {fileID: 460765545}
 --- !u!114 &1876579697
 MonoBehaviour:
   m_ObjectHideFlags: 0
