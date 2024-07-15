@@ -7,7 +7,7 @@ public class Score : MonoBehaviour
     Choices _choices;
     FacialExpression _faialExpression;
     [SerializeField] UiSubscribers _subscribersUi;
-    public int _score;
+    public static int _score;
     int _subscribers;
 
     private void Start()

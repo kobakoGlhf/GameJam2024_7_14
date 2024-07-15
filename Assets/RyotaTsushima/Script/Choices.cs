@@ -168,14 +168,14 @@ public class Choices : MonoBehaviour
             _talkText.TextActive();
             _question.gameObject.SetActive(false);
             enabled = false;
-            _currentScore = _score._score;
+            _currentScore = Score._score;
             _score.AddScore(0, 0, 4, 8);
             _score.AddScore(0, 1, 5, 9);
             _score.AddScore(0, 2, 6, 10);
             _score.AddScore(0, 3, 7, 11);
             _choiceEffect.AnimationPlay(_selectedChoices[0*3]+ _selectedChoices[0 * 3+1]+ _selectedChoices[0 * 3+2]);
             //Debug.Log("aaa");
-            if (_currentScore != _score._score)
+            if (_currentScore != Score._score)
             {
                 _faialExpression.Correct();
             }
@@ -191,13 +191,13 @@ public class Choices : MonoBehaviour
             _talkText.TextActive();
             _question.gameObject.SetActive(false);
             enabled = false;
-            _currentScore = _score._score;
+            _currentScore = Score._score;
             _score.AddScore(1, 12, 16, 20);
             _score.AddScore(1, 13, 17, 21);
             _score.AddScore(1, 14, 18, 22);
             _score.AddScore(1, 15, 19, 23);
             _choiceEffect.AnimationPlay(_selectedChoices[1 * 3] + _selectedChoices[1 * 3 + 1] + _selectedChoices[1 * 3 + 2]);
-            if (_currentScore != _score._score)
+            if (_currentScore != Score._score)
             {
                 _faialExpression.Correct();
             }
@@ -215,14 +215,14 @@ public class Choices : MonoBehaviour
                 _talkText.TextActive();
                 _question.gameObject.SetActive(false);
                 enabled = false;
-                _currentScore = _score._score;
+                _currentScore = Score._score;
                 _score.AddScore(2, 24, 28, 32);
                 _score.AddScore(2, 25, 29, 33);
                 _score.AddScore(2, 26, 30, 34);
                 _score.AddScore(2, 27, 31, 35);
                 _choiceEffect.AnimationPlay(_selectedChoices[1 * 3] + _selectedChoices[1 * 3 + 1] + _selectedChoices[1 * 3 + 2]);
                 Debug.Log("ÉQÅ[ÉÄïîï™èIóπ");
-                if (_currentScore != _score._score)
+                if (_currentScore != Score._score)
                 {
                     _faialExpression.Correct();
                 }
