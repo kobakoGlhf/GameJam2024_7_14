@@ -15,6 +15,12 @@ EditorBuildSettings:
     path: Assets/M1zuki/TestScene_Mizuki.unity
     guid: 6fe3dc69b43b7bd409f6c9bbe2cef74c
   - enabled: 1
+    path: Assets/Royzn/TestScene_Mizuki 2.unity
+    guid: ce02e76b5a709014099f60ebe790ce72
+  - enabled: 1
+    path: Assets/Royzn/TestScene_Mizuki 3.unity
+    guid: 2a419a303f792ff4795adaae445f2526
+  - enabled: 1
     path: Assets/Royzn/ResultScene.unity
     guid: c36d16c79e6098541a89e2db9a5d55f8
   m_configObjects: {}
