@@ -10,6 +10,7 @@ public class ChatBoxMove : MonoBehaviour
     //キャンバスの座標ではなく２Dの座標を入力してください
     [SerializeField, Tooltip("出てくる場所のX座標、キャンバスの座標ではなく２Dの座標を入力してください")] float _moveX;
     [SerializeField, Tooltip("出てくる場所のY座標、キャンバスの座標ではなく２Dの座標を入力してください")] float _moveY;
+    [SerializeField] float _waitChat;
     float _startX;
     float _startY;
     float _x;
@@ -68,6 +69,7 @@ public class ChatBoxMove : MonoBehaviour
 
     IEnumerator OutMoves()
     {
+        yield return new WaitForSeconds(_waitChat);
         float timer = _moveTime;
         _x = gameObject.transform.position.x;
         _y = gameObject.transform.position.y;
