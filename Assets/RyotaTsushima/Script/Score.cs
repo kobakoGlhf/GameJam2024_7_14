@@ -5,7 +5,10 @@ using UnityEngine;
 public class Score : MonoBehaviour
 {
     Choices _choices;
+    [SerializeField] UiSubscribers _subscribersUi;
     public static int _score;
+    int _subscribers;
+
     private void Start()
     {
         _choices = GetComponent<Choices>();
@@ -17,12 +20,29 @@ public class Score : MonoBehaviour
             && _choices._selectedChoices[times * 3 + 2] == _choices._choices[correct3])
         {
             _score++;
+
             //StartCoroutine(GoodEffect());
+            if (_score == 1)
+            {
+                _subscribers = 10000;
+            }
+            else if (_score == 2)
+            {
+                _subscribers = 100000;
+            }
+            else if(_score == 3)
+            {
+                _subscribers = 1000000;
+            }
+            _subscribersUi._count = _subscribers;
+            Debug.Log("ƒXƒRƒA‚ðŽó‚¯Žæ‚è‚Ü‚µ‚½");
+            Debug.Log("Score:" + _score);
         }
         else
         {
             //StartCoroutine(BadEffect());
         }
-        Debug.Log(_score);
+
+
     }
 }

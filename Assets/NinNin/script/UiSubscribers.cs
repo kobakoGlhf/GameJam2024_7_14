@@ -44,7 +44,7 @@ public class UiSubscribers : MonoBehaviour
         if (_text != null)
         {
             //currentTextからテキストに表示する
-            _text.text = _currentCount.ToString() + " 人";
+            _text.text ="登録者数 " + _currentCount.ToString() + " 人";
         }
         else
         {

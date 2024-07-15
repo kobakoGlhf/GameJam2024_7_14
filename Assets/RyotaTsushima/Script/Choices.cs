@@ -169,7 +169,7 @@ public class Choices : MonoBehaviour
             _score.AddScore(0, 2, 6, 10);
             _score.AddScore(0, 3, 7, 11);
             _choiceEffect.AnimationPlay(_selectedChoices[0*3]+ _selectedChoices[0 * 3+1]+ _selectedChoices[0 * 3+2]);
-            Debug.Log("aaa");
+            //Debug.Log("aaa");
         }
         else if (_choicesCount == 6)
         {
