@@ -20,7 +20,7 @@ public class FOutTitle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        targetObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -28,7 +28,7 @@ public class FOutTitle : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            _returnTitle.onClick.Invoke();
+            targetObject.SetActive(true);
         }
         
     }

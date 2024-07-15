@@ -38,26 +38,27 @@ public class ResultManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int finalScore = PlayerPrefs.GetInt("FinalScore");
+        
+        //int finalScore = PlayerPrefs.GetInt("FinalScore");
 
         //スコアの数値は（仮）です。
 
         switch (CharaPic._charaNam)
         {
             case 0:
-                if (finalScore < 30)
+                if (Score._score == 0)
                 {
                     _resultImage.sprite = _depressedScoreSpriteX;
                     _resultPopImage.sprite = _depressedPopSprX;
                 }
 
-                else if (finalScore >= 30 && finalScore < 50)
+                else if (Score._score == 1)
                 {
                     _resultImage.sprite = _copperScoreSpriteX;
                     _resultPopImage.sprite = _copperPopSprX;
                 }
 
-                else if (finalScore >= 50 && finalScore < 80)
+                else if (Score._score == 2)
                 {
                     _resultImage.sprite = _silverScoreSpriteX;
                     _resultPopImage.sprite = _silverPopSprX;
@@ -71,19 +72,19 @@ public class ResultManager : MonoBehaviour
                 break;
 
                 case 1:
-                if (finalScore < 30)
+                if (Score._score == 0)
                 {
                     _resultImage.sprite = _depressedScoreSpriteY;
                     _resultPopImage.sprite = _depressedPopSprY;
                 }
 
-                else if (finalScore >= 30 && finalScore < 50)
+                else if (Score._score == 1)
                 {
                     _resultImage.sprite = _copperScoreSpriteY;
                     _resultPopImage.sprite = _copperPopSprY;
                 }
 
-                else if (finalScore >= 50 && finalScore < 80)
+                else if (Score._score == 2)
                 {
                     _resultImage.sprite = _silverScoreSpriteY;
                     _resultPopImage.sprite = _silverPopSprY;
@@ -97,19 +98,19 @@ public class ResultManager : MonoBehaviour
                 break;
 
                 case 2:
-                if (finalScore < 30)
+                if (Score._score == 0)
                 {
                     _resultImage.sprite = _depressedScoreSpriteZ;
                     _resultPopImage.sprite = _depressedPopSprZ;
                 }
 
-                else if (finalScore >= 30 && finalScore < 50)
+                else if (Score._score == 1)
                 {
                     _resultImage.sprite = _copperScoreSpriteZ;
                     _resultPopImage.sprite = _copperPopSprZ;
                 }
 
-                else if (finalScore >= 50 && finalScore < 80)
+                else if (Score._score == 2)
                 {
                     _resultImage.sprite = _silverScoreSpriteZ;
                     _resultPopImage.sprite = _silverPopSprZ;

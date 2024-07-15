@@ -30,7 +30,7 @@ public class Score : MonoBehaviour
             {
                 _subscribers = 100000;
             }
-            else if(_score == 3)
+            else if(_score >= 3)
             {
                 _subscribers = 1000000;
             }
