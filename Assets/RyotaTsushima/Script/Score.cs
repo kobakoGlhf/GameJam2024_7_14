@@ -23,5 +23,6 @@ public class Score : MonoBehaviour
         {
             //StartCoroutine(BadEffect());
         }
+        Debug.Log(_score);
     }
 }
