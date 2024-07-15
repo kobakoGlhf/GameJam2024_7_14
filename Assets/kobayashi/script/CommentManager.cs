@@ -19,7 +19,8 @@ public class CommentManager : MonoBehaviour
     private void Start()
     {
         //_choices = GameObject.FindObjectOfType<Choices>().GetComponent<Choices>();
-        _createSpeed=Random.Range(_createSpeedOrigin,_createSpeedOrigin+1);
+        //_createSpeed=Random.Range(_createSpeedOrigin,_createSpeedOrigin+1);
+        _createSpeed = _createSpeedOrigin;
     }
     private void Update()
     {
@@ -28,7 +29,7 @@ public class CommentManager : MonoBehaviour
         {
             CreatComment();
             _timer = 0;
-            _createSpeed = Random.Range(_createSpeedOrigin, _createSpeedOrigin + 1);
+            //_createSpeed = Random.Range(_createSpeedOrigin, _createSpeedOrigin + 1);
         }
     }
     public void CreatComment()
