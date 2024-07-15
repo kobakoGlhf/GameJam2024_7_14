@@ -1,16 +1,17 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FacialExpression : MonoBehaviour
 {
     GameObject _charaSprite;
-    SpriteRenderer _spriteRenderer;
+    Image _spriteRenderer;
     [SerializeField,Tooltip("正解の表情のspriteをアサインしてください")] Sprite _correct;
     [SerializeField,Tooltip("不正解の表情のspriteをアサインしてください")] Sprite _wrong;
 
     private void Start()
     {
         _charaSprite = GameObject.Find("CharaSprite");
-        _spriteRenderer = _charaSprite.GetComponent<SpriteRenderer>();
+        _spriteRenderer = _charaSprite.GetComponent<Image>();
     }
     // Start is called before the first frame update
     public void Correct()
