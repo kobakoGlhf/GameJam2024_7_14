@@ -19,7 +19,7 @@ public class test : MonoBehaviour
         {
             Vector2 mousePos = Input.mousePosition;
 
-            _timeLimit.Display(3.0f, mousePos, _canvas);
+            //_timeLimit.Display(3.0f, mousePos, _canvas);
         }
     }
 }

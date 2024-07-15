@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UiTimeLimit : MonoBehaviour
 {
     [SerializeField] Image _circle;
-    [SerializeField] Text _text;
+    Text _text;
 
     [SerializeField] float _currentTime = 1.0f;
     [SerializeField] float _maxTime = 3.0f;
@@ -55,11 +55,13 @@ public class UiTimeLimit : MonoBehaviour
     /// <param name="time">何秒のタイマー？</param>
     /// <param name="pos">どこに表示する？</param>
     /// /// <param name="canvas">親となるキャンバス</param>
-    public void Display(float time, Vector2 pos, Canvas canvas)
+    public void Display(float time, Vector2 pos, GameObject canvas)
     {
         GameObject obj;
         obj = Instantiate(this.gameObject, pos, Quaternion.identity, canvas.transform); //インスタンス作成
         //設定項目
+        GameObject textObj= obj.transform.GetChild(0).gameObject;
+        _text=textObj.GetComponent<Text>();
         obj.SetActive(true); //有効にする
         UiTimeLimit uiTimeLimit = obj.GetComponent<UiTimeLimit>();
         uiTimeLimit._isInstantiate = true; //インスタンスモード
