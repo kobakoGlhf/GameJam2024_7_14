@@ -3,32 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DisplayCount : MonoBehaviour
+public class UiSubscribers : MonoBehaviour
 {
-    int _goalCount;
-    int _currentCount = 0;
-
     [SerializeField] Text _text;
-    /// <summary>何秒ごとにTextを更新するか</summary>
-    [SerializeField] float _interval = 0.01f;
-    /// <summary>1ループごとに増減する量</summary>
-    [SerializeField] int _increase = 1;
 
+    [SerializeField] int _goalCount;
+    [SerializeField] int _currentCount = 0;
+
+    [Tooltip("何秒ごとにTextを更新するか")]
+    [SerializeField] float _interval = 0.01f;
+    [Tooltip("1ループごとに増減する量。")]
+    [SerializeField] int _increase = 1;
+    [Tooltip("ゴール値と現在値の差の大きさによって、increaseを増減する。\nつまり、差が大きいほど素早く増減する。\nfalseにした場合、CurrentCountの増減は常に一定になる。")]
+    [SerializeField] bool _SmoothIncrease = true;
+    [Tooltip("差値の何割を、increaseに設定するか。")]
+    [SerializeField] float _SmoothIncreasePercent = 0.05f;
+
+    // プロパティ
     /// <summary>外部からこの変数を直接いじって、登録者数を表示する。</summary>
-    public int _subscribers
+    public int _count
     {
         get => _goalCount;
         set
         {
             if (value < 0)
             {
-                Debug.Log("マイナスの値は入力できません");
+                Debug.LogWarning("マイナスの値は入力できません");
                 return;
             }
             _goalCount = value;
         }
     }
-
 
     private void Start()
     {
@@ -36,20 +41,28 @@ public class DisplayCount : MonoBehaviour
     }
     private void Update()
     {
-        //currentTextからテキストに表示する
-        _text.text = _currentCount.ToString() + " 人";
+        if (_text != null)
+        {
+            //currentTextからテキストに表示する
+            _text.text = _currentCount.ToString() + " 人";
+        }
+        else
+        {
+            Debug.LogWarning($"'{_text}' is null.", this.gameObject);
+        }
     }
 
     IEnumerator counter()
     {
         while (true)
         {
-            // ゴールとの離れ具合によって、_increaseを増減させる
+            // ゴールと差値によって、_increaseを増減させる
+            if (_SmoothIncrease == true)
             {
-                int difference;
+                float difference;
                 difference = Mathf.Abs(_goalCount - _currentCount); //差を入手
 
-                _increase = difference / 10;
+                _increase = (int)(difference * _SmoothIncreasePercent);
 
                 if (_increase <= 0) //最低値は1
                 {
@@ -95,5 +108,4 @@ public class DisplayCount : MonoBehaviour
             yield return new WaitForSeconds(_interval);
         }
     }
-
 }
