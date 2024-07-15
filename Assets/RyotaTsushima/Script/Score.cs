@@ -5,6 +5,7 @@ using UnityEngine;
 public class Score : MonoBehaviour
 {
     Choices _choices;
+    FacialExpression _faialExpression;
     [SerializeField] UiSubscribers _subscribersUi;
     public static int _score;
     int _subscribers;
@@ -12,6 +13,7 @@ public class Score : MonoBehaviour
     private void Start()
     {
         _choices = GetComponent<Choices>();
+        _faialExpression = GetComponent<FacialExpression>();
     }
     public void AddScore(int times, int correct1, int correct2, int correct3)   //スコア加算　正解のインデックスを入力してください
     {
@@ -20,6 +22,7 @@ public class Score : MonoBehaviour
             && _choices._selectedChoices[times * 3 + 2] == _choices._choices[correct3])
         {
             _score++;
+            _faialExpression.Correct();
 
             //StartCoroutine(GoodEffect());
             if (_score == 1)
@@ -40,6 +43,7 @@ public class Score : MonoBehaviour
         }
         else
         {
+            _faialExpression.Wrong();
             //StartCoroutine(BadEffect());
         }
 
