@@ -7,8 +7,13 @@ public class TitleScene : MonoBehaviour
     [SerializeField] GameObject _bgmObj;
     SwitchScenes _scenes;
     int _index;
-    public GameObject _creditImage;
+    [SerializeField] GameObject _creditImage;
     private bool _imageDisplayed = false;
+    [SerializeField] SEObj _seObj;
+    [SerializeField] AudioClip _cursor;
+    [SerializeField] AudioClip _determination;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,12 +31,14 @@ public class TitleScene : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.W))
             {
+                _seObj.PlaySe(_cursor);
                 _text[0].color = Color.red;
                 _text[1].color = Color.white;
                 _index = 0;
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
+                _seObj.PlaySe(_cursor);
                 _text[1].color = Color.red;
                 _text[0].color = Color.white;
                 _index = 1;
@@ -43,10 +50,12 @@ public class TitleScene : MonoBehaviour
         {
             if(_index == 0)
             {
+                _seObj.PlaySe(_determination);
                 _scenes.ChangeScene();
             }
             if(_index == 1)
             {
+                _seObj.PlaySe(_determination);
                 ToggleImageDisplay();
             }
         }
