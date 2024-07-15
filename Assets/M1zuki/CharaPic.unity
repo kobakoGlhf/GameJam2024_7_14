@@ -919,9 +919,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fadePanel: {fileID: 1412056886}
   _changeSceneWaitTime: 2
-  _sceneName0: CharaPic
-  _sceneName1: TestScene_Mizuki
-  _sceneName2: Title
+  _sceneName0: TestScene_Mizuki
+  _sceneName1: TestScene_Mizuki 2
+  _sceneName2: TestScene_Mizuki 3
 --- !u!4 &1279871443
 Transform:
   m_ObjectHideFlags: 0
