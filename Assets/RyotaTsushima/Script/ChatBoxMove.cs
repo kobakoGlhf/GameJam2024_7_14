@@ -1,21 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ChatBoxMove : MonoBehaviour
 {
     [SerializeField] float _moveTime;
-    [SerializeField] float _moveX;
-    [SerializeField] float _moveY;
+    //キャンバスの座標ではなく２Dの座標を入力してください
+    [SerializeField, Tooltip("出てくる場所のX座標、キャンバスの座標ではなく２Dの座標を入力してください")] float _moveX;
+    [SerializeField, Tooltip("出てくる場所のY座標、キャンバスの座標ではなく２Dの座標を入力してください")] float _moveY;
+    float _startX;
+    float _startY;
     float _x;
     float _y;
     float _dX;
     float _dY;
-    Transform _tf;
+    RectTransform _tf;
     // Start is called before the first frame update
     void Start()
     {
-        _tf = GetComponent<Transform>();
+        _tf = GetComponent<RectTransform>();
+        _startX = _tf.position.x;
+        _startY = _tf.position.y;
     }
 
     // Update is called once per frame
@@ -24,41 +31,56 @@ public class ChatBoxMove : MonoBehaviour
 
     }
 
-    //public void Move()
-    //{
-    //    StartCoroutine(Moves());
-    //}
+    public void Fadein()
+    {
+        StartCoroutine(InMoves());
+    }
 
-    //IEnumerator Moves()
-    //{
-    //    _x = gameObject.transform.position.x;
-    //    _y = gameObject.transform.position.y;
-    //    _dX = _moveX - _x;
-    //    _dY = _moveY - _y;
-    //    bool _moveFinished = false;
-    //    //while (false)
-    //    //{
-    //    //    _x += _dX * Time.deltaTime;
-    //    //    _y += _dY * Time.deltaTime;
-    //    //    _tf.x = _x;
+    public void FadeOut()
+    {
+        StartCoroutine(OutMoves());
+    }
 
-    //    //    yield return null;
-    //    //    _x = gameObject.transform.position.x;
-    //    //    _y = gameObject.transform.position.y;
-    //    //    if (_x > 0 )
-    //    //    {
-    //    //        if (_x >= _moveX)
-    //    //        {
-    //    //            _moveFinished = true;
-    //    //        }
-    //    //    }
-    //    //    else
-    //    //    {
-    //    //        if(_x<=_moveX)
-    //    //        {
-    //    //            _moveFinished = true;
-    //    //        }
-    //    //    }
-    //    }
-    //}
+    public void SelectedEffect()
+    {
+        gameObject.SetActive(false);
+        _tf.position = new Vector2(_startX, _startY);
+        gameObject.SetActive(true);
+    }
+
+    IEnumerator InMoves()
+    {
+        float timer = _moveTime;
+        _x = gameObject.transform.position.x;
+        _y = gameObject.transform.position.y;
+        _dX = (_moveX - _x) / _moveTime;
+        _dY = (_moveY - _y) / _moveTime;
+        while (timer > 0)
+        {
+            _x += _dX * Time.deltaTime;
+            _y += _dY * Time.deltaTime;
+            _tf.position = new Vector2(_x, _y);
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+        yield break;
+    }
+
+    IEnumerator OutMoves()
+    {
+        float timer = _moveTime;
+        _x = gameObject.transform.position.x;
+        _y = gameObject.transform.position.y;
+        _dX = (_startX - _x) / _moveTime;
+        _dY = (_startY - _y) / _moveTime;
+        while (timer >= 0)
+        {
+            _x += _dX * Time.deltaTime;
+            _y += _dY * Time.deltaTime;
+            _tf.position = new Vector2(_x, _y);
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+        yield break;
+    }
 }
