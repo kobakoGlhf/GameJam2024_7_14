@@ -10,20 +10,18 @@ public class TalkText : MonoBehaviour
     bool _isFirst3;
     public int _index = 0;
     string[] _words;
-    Choices _choices;
+    [SerializeField] Choices _choices;
     [SerializeField] string[] _talk;
     public Text _text;
     [SerializeField] GameObject _masseageBox;
     [SerializeField] SEObj _seObj;
     [SerializeField,Tooltip("テキストのカタカタ音")] AudioClip _textSeClip;
     Coroutine _dialogue;
-
     // Start is called before the first frame update
     void Start()
     {
         _seObj.PlaySe(_textSeClip);
         _dialogue = StartCoroutine("Dialogue");
-        _choices = GetComponent<Choices>();
     }
 
     // Update is called once per frame
@@ -80,11 +78,6 @@ public class TalkText : MonoBehaviour
             _text.text = "";
             _index++;
             _dialogue = StartCoroutine(Dialogue());
-        }
-        //デバッグ用
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            TextHidden();
         }
     }
     void TextHidden()
