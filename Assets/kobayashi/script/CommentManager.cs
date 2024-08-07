@@ -48,7 +48,6 @@ public class CommentManager : MonoBehaviour
             kasu = true;
         }
         _creatObject.Add(creatObject);
-        Debug.Log(_creatObject.Count);
         float creatObjectY = _creatObject.Count * -50;
         RectTransform rectTransform = creatObject.GetComponent<RectTransform>();
         rectTransform.anchoredPosition = new Vector2(_poitionAnchor.anchoredPosition.x,_poitionAnchor.anchoredPosition.y+ creatObjectY);//èâä˙à íu

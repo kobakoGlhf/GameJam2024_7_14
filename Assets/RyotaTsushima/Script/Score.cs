@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Score : MonoBehaviour
@@ -22,7 +20,7 @@ public class Score : MonoBehaviour
             && _choices._selectedChoices[times * 3 + 2] == _choices._choices[correct3])
         {
             _score++;
-            
+
 
             //StartCoroutine(GoodEffect());
             if (_score == 1)
@@ -33,7 +31,7 @@ public class Score : MonoBehaviour
             {
                 _subscribers = 100000;
             }
-            else if(_score >= 3)
+            else if (_score >= 3)
             {
                 _subscribers = 1000000;
             }
@@ -41,12 +39,45 @@ public class Score : MonoBehaviour
             Debug.Log("スコアを受け取りました");
             Debug.Log("Score:" + _score);
         }
-        else
+    }
+    public void AddScore()   //スコア加算　正解のインデックスを入力してください
+    {
+        int select1 = 0, select2 = 0, select3 = 0;
+        int i = 0;
+        foreach (var choice in _choices._choicesNeo)
         {
-            
-            //StartCoroutine(BadEffect());
+            if (choice == _choices._selectedChoices[0])
+            {
+                select1 = i;
+            }
+            else if (choice == _choices._selectedChoices[1])
+            {
+                select2 = i;
+            }
+            else if (choice == _choices._selectedChoices[2])
+            {
+                select3 = i;
+            }
+            i++;
         }
-
-
+        if (select1 - select2 == select2 - select3 && !(select1 - select2 == 0))
+        {
+            _score++;
+            if (_score == 1)
+            {
+                _subscribers = 10000;
+            }
+            else if (_score == 2)
+            {
+                _subscribers = 100000;
+            }
+            else if (_score >= 3)
+            {
+                _subscribers = 1000000;
+            }
+            _subscribersUi._count = _subscribers;
+            Debug.Log("スコアを受け取りました");
+            Debug.Log("Score:" + _score);
+        }
     }
 }

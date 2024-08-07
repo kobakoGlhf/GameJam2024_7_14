@@ -1,20 +1,15 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharaSprite : MonoBehaviour
 {
 
     [SerializeField] Sprite[] _charaSprites;
-    [SerializeField] SpriteRenderer _spriteRenderer;
+    [SerializeField] Image _spriteRenderer;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        //Debug—p
-        //CharaPic._charaNam = 1;
-        SpriteSet();
-    }
 
-    void SpriteSet()
+    public void SpriteSet()
     {
         if (CharaPic._charaNam == 0)
         {

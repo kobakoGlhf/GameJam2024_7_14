@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,73 +12,49 @@ public class TalkText : MonoBehaviour
     public int _index = 0;
     string[] _words;
     [SerializeField] Choices _choices;
-    [SerializeField] string[] _talk;
+    [SerializeField] public string[] _talk;
+    public string[][] _talkText = new string[4][];
     public Text _text;
     [SerializeField] GameObject _masseageBox;
     [SerializeField] SEObj _seObj;
-    [SerializeField,Tooltip("テキストのカタカタ音")] AudioClip _textSeClip;
+    [SerializeField, Tooltip("テキストのカタカタ音")] AudioClip _textSeClip;
     Coroutine _dialogue;
+    int _talkPhase;
     // Start is called before the first frame update
     void Start()
     {
         _seObj.PlaySe(_textSeClip);
-        _dialogue = StartCoroutine("Dialogue");
+        _dialogue = StartCoroutine(Dialogue());
+        _index++;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (_index == 3 && !_isFirst)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            _text.text = "（なんてコメントしようかな？？）";
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (_index == _talkText[_talkPhase].Length && _talkPhase != _talkText.Length - 1)
             {
+                _index = 0;
                 TextHidden();
-                _isFirst = true;
-                enabled = false;
-            }
-            return;
-        }
-        else if (_index == 5 && !_isFirst2)
-        {
-            _text.text = "（なんてコメントしようかな？？）";
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                TextHidden();
-                _isFirst2 = true;
                 _choices.enabled = true;
                 enabled = false;
+                _talkPhase++;
+                return;
             }
-            return;
-        }
-        else if (_index == 7 && !_isFirst3)
-        {
-            _text.text = "（なんてコメントしようかな？？）";
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                TextHidden();
-                _isFirst3 = true;
-                _choices.enabled = true;
-                enabled = false;
-            }
-            return;
-        }
-        else if (_index == 9)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
+            else if (_talkPhase == _talkText.Length - 1 && _index == _talkText[_talkPhase].Length)
             {
                 SceneManager.LoadScene("ResultScene");
             }
-        }
 
-        //スペースを押したら進む
-        if (Input.GetKeyDown(KeyCode.Space) && _dialogue == null&&_index!=9)
-        {
-            _seObj.PlaySe(_textSeClip); //SE鳴らすところ
-            _text.text = "";
-            _index++;
-            _dialogue = StartCoroutine(Dialogue());
+            //スペースを押したら進む
+            else if (_dialogue == null)
+            {
+                _seObj.PlaySe(_textSeClip); //SE鳴らすところ
+                _text.text = "";
+                _dialogue = StartCoroutine(Dialogue());
+                _index++;
+            }
         }
     }
     void TextHidden()
@@ -99,7 +76,7 @@ public class TalkText : MonoBehaviour
 
     IEnumerator Dialogue() //1文字ずつ表示する
     {
-        _words = _talk[_index].Split(' ');
+        _words = _talkText[_talkPhase][_index].Split(' ');
 
         foreach (string word in _words)
         {
@@ -107,5 +84,28 @@ public class TalkText : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         _dialogue = null;
+    }
+    public void TalkTextInArray(string[] text)
+    {
+        List<string> strings = new List<string>();
+        int i = 0;
+        foreach (string word in text)
+        {
+            strings.Add(word);
+            if (word == "（なんてコメントしようかな？？）" || text[text.Length - 1] == word)
+            {
+                _talkText[i] = new string[strings.Count];
+                for (int j = 0; j < strings.Count; j++)
+                {
+                    _talkText[i][j] = strings[j];
+                }
+                i++;
+                strings.Clear();
+                if (i > _talkText.Length)
+                {
+                    break;
+                }
+            }
+        }
     }
 }

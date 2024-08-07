@@ -8,12 +8,6 @@ public class ChoiceEffect : MonoBehaviour
     //[SerializeField] Choices _choices;
     [SerializeField] Image _panel;
     [SerializeField] public Text _text;
-    private void Start()
-    {
-        _panel.gameObject.SetActive(true);
-        _text.gameObject.SetActive(true);
-        this.gameObject.SetActive(false);
-    }
     public void AnimationPlay(string choicesString)
     {
         this.gameObject.SetActive(true);

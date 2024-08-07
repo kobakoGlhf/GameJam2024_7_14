@@ -14,6 +14,7 @@ public class UiTimeLimit : MonoBehaviour
 
     bool _isInstantiate = false;
 
+    Queue<GameObject> _createdTimer=new Queue<GameObject>();
     void Update()
     {
         if (_isInstantiate == true)
@@ -55,10 +56,10 @@ public class UiTimeLimit : MonoBehaviour
     /// <param name="time">何秒のタイマー？</param>
     /// <param name="pos">どこに表示する？</param>
     /// /// <param name="canvas">親となるキャンバス</param>
-    public void Display(float time, Vector2 pos, GameObject canvas)
+    public void Display(GameObject originalObject,float time, Vector2 pos, GameObject canvas)
     {
         GameObject obj;
-        obj = Instantiate(this.gameObject, pos, Quaternion.identity, canvas.transform); //インスタンス作成
+        obj = Instantiate(originalObject, pos, Quaternion.identity, canvas.transform); //インスタンス作成
         //設定項目
         obj.SetActive(true); //有効にする
         UiTimeLimit uiTimeLimit = obj.GetComponent<UiTimeLimit>();
@@ -67,5 +68,15 @@ public class UiTimeLimit : MonoBehaviour
         //初期値を入力
         uiTimeLimit._maxTime = time;
         uiTimeLimit._currentTime = time;
+
+        //追加　delete用に生成したobjをQueueに入れる
+        _createdTimer.Enqueue(obj);
+    }
+    public void DestroyTimer()
+    {
+        if (_createdTimer.Count != 0)
+        {
+            Destroy(_createdTimer.Dequeue());
+        }
     }
 }

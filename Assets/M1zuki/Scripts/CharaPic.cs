@@ -43,12 +43,12 @@ public class CharaPic : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.S))
             {
                 _charaNam = 1;
-                NextScene("SceneChange1");
+                NextScene("SceneChange0");
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
                 _charaNam = 2;
-                NextScene("SceneChange2");
+                NextScene("SceneChange0");
             }
         }
     }

@@ -5,8 +5,8 @@ public class FacialExpression : MonoBehaviour
 {
     GameObject _charaSprite;
     Image _spriteRenderer;
-    [SerializeField,Tooltip("正解の表情のspriteをアサインしてください")] Sprite _correct;
-    [SerializeField,Tooltip("不正解の表情のspriteをアサインしてください")] Sprite _wrong;
+    [SerializeField,Tooltip("正解の表情のspriteをアサインしてください")] public Sprite _correct;
+    [SerializeField,Tooltip("不正解の表情のspriteをアサインしてください")] public Sprite _wrong;
 
     private void Start()
     {

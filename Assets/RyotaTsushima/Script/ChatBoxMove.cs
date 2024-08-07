@@ -71,15 +71,15 @@ public class ChatBoxMove : MonoBehaviour
     {
         yield return new WaitForSeconds(_waitChat);
         float timer = _moveTime;
-        _x = gameObject.transform.position.x;
-        _y = gameObject.transform.position.y;
+        _x = gameObject.transform.localPosition.x;
+        _y = gameObject.transform.localPosition.y;
         _dX = (_startX - _x) / _moveTime;
         _dY = (_startY - _y) / _moveTime;
         while (timer >= 0)
         {
             _x += _dX * Time.deltaTime;
             _y += _dY * Time.deltaTime;
-            _tf.position = new Vector2(_x, _y);
+            _tf.localPosition = new Vector2(_x, _y);
             timer -= Time.deltaTime;
             yield return null;
         }

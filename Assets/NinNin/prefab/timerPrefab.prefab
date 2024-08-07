@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6112090429128228268}
   - component: {fileID: 913765789072931222}
   m_Layer: 5
-  m_Name: circle
+  m_Name: timerPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -365, y: -34}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8767203199820653101
 CanvasRenderer:
