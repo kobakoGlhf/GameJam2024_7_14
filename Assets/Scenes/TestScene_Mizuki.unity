@@ -1525,10 +1525,6 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1876579697}
-    - target: {fileID: 883675077073458487, guid: 7059e219885a47649a6881e8f63371e1, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1876579697}
     - target: {fileID: 2154456642805652107, guid: 7059e219885a47649a6881e8f63371e1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1613,24 +1609,12 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1876579697}
-    - target: {fileID: 5810485877254958862, guid: 7059e219885a47649a6881e8f63371e1, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1876579697}
     - target: {fileID: 6296493532253713894, guid: 7059e219885a47649a6881e8f63371e1, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1876579697}
-    - target: {fileID: 6296493532253713894, guid: 7059e219885a47649a6881e8f63371e1, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1876579697}
     - target: {fileID: 8613186588314109231, guid: 7059e219885a47649a6881e8f63371e1, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1876579697}
-    - target: {fileID: 8613186588314109231, guid: 7059e219885a47649a6881e8f63371e1, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1876579697}
     m_RemovedComponents: []
