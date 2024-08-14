@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,9 +16,20 @@ public class UiTimeLimit : MonoBehaviour
     bool _isInstantiate = false;
 
     Queue<GameObject> _createdTimer=new Queue<GameObject>();
+    public static bool _timerStop;
+
+    public static GameObject _recentObject;
+    private void Start()
+    {
+        if (_isInstantiate)
+        {
+            _recentObject = gameObject;
+        }
+        _timerStop = true;
+    }
     void Update()
     {
-        if (_isInstantiate == true)
+        if (_isInstantiate&&_timerStop)
         {
             // タイマー減算
             _currentTime -= Time.deltaTime;
@@ -77,6 +89,18 @@ public class UiTimeLimit : MonoBehaviour
         if (_createdTimer.Count != 0)
         {
             Destroy(_createdTimer.Dequeue());
+        }
+    }
+    IEnumerator FadeOut(float timer)
+    {
+        var image= GetComponent<Image>();
+        float colorCangeTimer = image.color.a / timer;
+        while (timer > 0&& image != null)
+        {
+            timer -= Time.deltaTime;
+            image.color -= new Color(0, 0, 0, colorCangeTimer * Time.deltaTime);
+            _text.color -= new Color(0, 0, 0, colorCangeTimer * Time.deltaTime);
+            yield return null;
         }
     }
 }

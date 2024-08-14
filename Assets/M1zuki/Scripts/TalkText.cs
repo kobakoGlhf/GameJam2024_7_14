@@ -6,11 +6,7 @@ using UnityEngine.UI;
 
 public class TalkText : MonoBehaviour
 {
-    bool _isFirst;
-    bool _isFirst2;
-    bool _isFirst3;
     public int _index = 0;
-    string[] _words;
     [SerializeField] Choices _choices;
     [SerializeField] public string[] _talk;
     public string[][] _talkText = new string[4][];
@@ -31,7 +27,7 @@ public class TalkText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)||Input.GetMouseButtonDown(0))
         {
             if (_index == _talkText[_talkPhase].Length && _talkPhase != _talkText.Length - 1)
             {
@@ -76,13 +72,16 @@ public class TalkText : MonoBehaviour
 
     IEnumerator Dialogue() //1文字ずつ表示する
     {
-        _words = _talkText[_talkPhase][_index].Split(' ');
-
-        foreach (string word in _words)
+        if (_talkText[_talkPhase][_index] != "（なんてコメントしようかな？？）")
         {
-            _text.text = _text.text + word;
-            yield return new WaitForSeconds(0.1f);
+            char[] charWords = _talkText[_talkPhase][_index].Replace(" ","").ToCharArray();
+            foreach (char word in charWords)
+            {
+                _text.text += word;
+                yield return new WaitForSeconds(0.1f);
+            }
         }
+        else _text.text = "（なんてコメントしようかな？？）";
         _dialogue = null;
     }
     public void TalkTextInArray(string[] text)

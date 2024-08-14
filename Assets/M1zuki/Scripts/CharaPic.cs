@@ -10,9 +10,7 @@ public class CharaPic : MonoBehaviour
     Animator _bgmAnimator;
     [SerializeField] int _changeSceneWaitTime = 2;
     [SerializeField] SEObj _seObj;
-    [SerializeField,Tooltip("キャラ1シーン")] string _sceneName0;
-    [SerializeField, Tooltip("キャラ2シーン")] string _sceneName1;
-    [SerializeField, Tooltip("キャラ3シーン")] string _sceneName2;
+    [SerializeField, Tooltip("ゲームシーン")] string _sceneName0;
     [SerializeField, Tooltip("SEのクリップ")] AudioClip _clip;
 
     // Start is called before the first frame update
@@ -28,29 +26,27 @@ public class CharaPic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CharacterPic();
-    }
-
-    void CharacterPic()
-    {
         if (!_isFirst)
         {
             if (Input.GetKeyDown(KeyCode.A))
             {
-                _charaNam = 0;
-                NextScene("SceneChange0");
+                CharacterPic(0);
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
-                _charaNam = 1;
-                NextScene("SceneChange0");
+                CharacterPic(1);
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
-                _charaNam = 2;
-                NextScene("SceneChange0");
+                CharacterPic(2);
             }
         }
+    }
+
+    public void CharacterPic(int num)
+    {
+        _charaNam = num;
+        NextScene("SceneChange0");
     }
     void NextScene(string methodName)
     {
@@ -65,15 +61,5 @@ public class CharaPic : MonoBehaviour
     {
         Destroy(_bgmObj);
         SceneManager.LoadScene(_sceneName0);
-    }
-    void SceneChange1()
-    {
-        Destroy(_bgmObj);
-        SceneManager.LoadScene(_sceneName1);
-    }
-    void SceneChange2()
-    {
-        Destroy(_bgmObj);
-        SceneManager.LoadScene(_sceneName2);
     }
 }

@@ -1,78 +1,109 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 using UnityEngine.UI;
 
 public class CommentManager : MonoBehaviour
 {
-    [SerializeField,Tooltip("コメントのプレハブ")] GameObject _commentTextObject;
-    [SerializeField,Tooltip("生成位置")] RectTransform _poitionAnchor;//コメント位置
-    [SerializeField]string[] _commentText;
+    [SerializeField, Tooltip("コメントのプレハブ")] GameObject _commentTextPrefab;
+    [SerializeField, Tooltip("生成位置")] RectTransform _positionAnchor;//コメント位置
+    [SerializeField] string[] _commentText;
     [SerializeField, Range(200, 1000)] float _commentSpeed;
-    [SerializeField] float _createSpeedOrigin;
-    float _createSpeed;
+    [SerializeField] public float _createSpeed;
+    [SerializeField] int _createCommentMaxHigh;
     Choices _choices;
-    List<GameObject> _creatObject=new List<GameObject>();
+    List<GameObject> _creatObject = new List<GameObject>();
+    [SerializeField] float _space;
     float _timer;
+    float _commentHigh;
+    int _callClearCountFlag;
     private void Start()
     {
         _choices = GameObject.FindObjectOfType<Choices>();
-        Debug.Log(_choices);
-        //_createSpeed=Random.Range(_createSpeedOrigin,_createSpeedOrigin+1);
-        _createSpeed = _createSpeedOrigin;
+        var commentRectTf = _commentTextPrefab.GetComponent<RectTransform>();
+        _commentHigh = commentRectTf.sizeDelta.y + _space;
+        CreatComment();
     }
     private void Update()
     {
-        if (_choices._inGame==false)
+        if (_choices?._inGame == false || _choices == null)
         {
             _timer += Time.deltaTime;
-            if (_timer > _createSpeed)//&&!_choices._inGame)
+            if (_timer > _createSpeed)
             {
                 CreatComment();
                 _timer = 0;
-                //_createSpeed = Random.Range(_createSpeedOrigin, _createSpeedOrigin + 1);
+
             }
         }
     }
     public void CreatComment()
     {
-        Debug.Log("aaa");
-        bool kasu=false;
+        CommentResetMode mode;
         int i = Random.Range(0, _commentText.Length);
-        GameObject creatObject = Instantiate(_commentTextObject, _poitionAnchor.transform);
+        GameObject creatObject = Instantiate(_commentTextPrefab, _positionAnchor.transform);
         //階段状にコメントが表示されるようにする部分
         if (_creatObject.Count == 0)
         {
-            kasu = true;
+            mode = CommentResetMode.Center;
+        }
+        else
+        {
+            mode = CommentResetMode.Normal;
         }
         _creatObject.Add(creatObject);
-        float creatObjectY = _creatObject.Count * -50;
+        float creatObjectY = (_creatObject.Count - 1) * -_commentHigh;
         RectTransform rectTransform = creatObject.GetComponent<RectTransform>();
-        rectTransform.anchoredPosition = new Vector2(_poitionAnchor.anchoredPosition.x,_poitionAnchor.anchoredPosition.y+ creatObjectY);//初期位置
-        
+        rectTransform.anchoredPosition = new Vector2(0, 0+ creatObjectY);//初期位置
+
         creatObject.GetComponent<Text>().text = _commentText[i];//コメントの中身変更
-        StartCoroutine(CommentMove(creatObject,kasu));//コメントを動かす部分
+        StartCoroutine(CommentMove(creatObject, mode));//コメントを動かす部分
     }
-    IEnumerator CommentMove(GameObject gameObject,bool kasu)
+    IEnumerator CommentMove(GameObject gameObject, CommentResetMode resetMode)
     {
-        bool aaa=true;
+        var text=gameObject.GetComponent<Text>();
+        var textOutLine=gameObject.GetComponent<Outline>();
+        bool flag = false;
+        RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
+        if (resetMode == CommentResetMode.Center)
+        {
+            flag = true;
+        }
         while (true)
         {
-            RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
             rectTransform.anchoredPosition += new Vector2(_commentSpeed * -1, 0) * Time.deltaTime;
-            if (rectTransform.anchoredPosition.x < -1920 / 2 && kasu&&aaa) 
+            if (rectTransform.anchoredPosition.x < -1920 / 2 && resetMode == CommentResetMode.Center && flag)
             {
-                aaa = false;
+                flag = false;
                 _creatObject.Clear();
+            }
+            else if (_creatObject.Count == _createCommentMaxHigh && resetMode == CommentResetMode.Center && flag)
+            {
+                _creatObject.Clear();
+                flag = false;
             }
             if (rectTransform.anchoredPosition.x < -2500)
             {
-                Destroy(rectTransform.gameObject);
+                Destroy(gameObject);
                 yield break;
             }
-            yield return new WaitForEndOfFrame();
+            if (_choices?._inGame == true)
+            {
+                text.color -= new Color(0, 0, 0, 3f/255);
+                textOutLine.effectColor -= new Color(0, 0, 0, 3f / 255);
+                if (text.color.a <= 0)
+                {
+                    Destroy(gameObject);
+                    yield break;
+                }
+            }
+            yield return new WaitForFixedUpdate();
         }
+    }
+    enum CommentResetMode
+    {
+        Normal,
+        Center,
+        CommentLimit
     }
 }

@@ -20,5 +20,10 @@ public class SwitchScenes : MonoBehaviour
     public void ChangeScene()
     {
         SceneManager.LoadScene(_sceneName);
+        if (Cursor.visible == false)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 }

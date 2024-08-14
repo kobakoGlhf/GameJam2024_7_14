@@ -42,5 +42,7 @@ public class ChoicesMoveManager : MonoBehaviour
             }
             else choicesMove.Value?.FadeInOut(false, _waitMoveTimer, _movingTime, _waitResetTimer);
         }
+        var timer= UiTimeLimit._recentObject.GetComponent<UiTimeLimit>();
+        timer?.StartCoroutine("FadeOut", _waitMoveTimer);
     }
 }

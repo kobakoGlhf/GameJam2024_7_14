@@ -6,13 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/M1zuki/Title.unity
+    path: Assets/Scenes/Title.unity
     guid: 784ce874795e1b248b08cc101b3f421e
   - enabled: 1
-    path: Assets/M1zuki/CharaPic.unity
+    path: Assets/Scenes/CharaPic.unity
     guid: 48cc69e19c66f764a8e893d7a0195da4
   - enabled: 1
-    path: Assets/M1zuki/TestScene_Mizuki.unity
+    path: Assets/Scenes/TestScene_Mizuki.unity
     guid: 6fe3dc69b43b7bd409f6c9bbe2cef74c
   - enabled: 0
     path: Assets/Royzn/TestScene_Mizuki 2.unity
@@ -21,6 +21,6 @@ EditorBuildSettings:
     path: Assets/Royzn/TestScene_Mizuki 3.unity
     guid: 2a419a303f792ff4795adaae445f2526
   - enabled: 1
-    path: Assets/Royzn/ResultScene.unity
+    path: Assets/Scenes/ResultScene.unity
     guid: c36d16c79e6098541a89e2db9a5d55f8
   m_configObjects: {}

@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,6 +33,8 @@ public class Choices : MonoBehaviour
     Coroutine _coroutineTimer;//null入れるよう
     bool _duringAnimation;
     int[] _randomKeyArray;
+    [SerializeField]AudioSource _audioSource;
+    [SerializeField] AudioClip _audioClip;
     private void Start()
     {
         _score = GameObject.FindObjectOfType<Score>();
@@ -56,30 +56,59 @@ public class Choices : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.W))
             {
-                ChoiceButton(_randomKeyArray[0], 'W');
+                ChoiceButton(0);
             }
             else if (Input.GetKeyDown(KeyCode.A))
             {
-                ChoiceButton(_randomKeyArray[1], 'A');
+                ChoiceButton(1);
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
-                ChoiceButton(_randomKeyArray[2], 'S');
+                ChoiceButton(2);
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
-                ChoiceButton(_randomKeyArray[3],'D');
+                ChoiceButton(3);
             }
         }
     }
-    void ChoiceButton(int sum,char key)
+    public void ChoiceButton(int sum)// EventTriggerで呼び出せるようにめんどくさいことしてます。
     {
-        _choiceMoveManager.SelectKey(key);
-        StopCoroutine(ChoicesTimer());
-        _coroutineTimer = null;//fix コルーチンリセット
-        _selectedChoices[_choicesCount] = _choicesNeo[_loopCount,_choicesCount,sum]; //選択肢を保存
-        _choicesCount++; //カウントを増やす
-        StartCoroutine(ChoiceEffect(_choicesCount == 3));
+        UiTimeLimit._timerStop = false;
+        if (_inGame && _duringAnimation == false)
+        {
+            char key;
+            switch (sum)
+            {
+                case 0:
+                    sum = _randomKeyArray[0];
+                    key = 'W';
+                    break;
+                case 1:
+                    sum = _randomKeyArray[1];
+                    key = 'A';
+                    break;
+                case 2:
+                    sum = _randomKeyArray[2];
+                    key = 'S';
+                    break;
+                case 3:
+                    sum = _randomKeyArray[3];
+                    key = 'D';
+                    break;
+                default:
+                    sum = Random.Range(0, _randomKeyArray.Length - 1);
+                    key = ' ';
+                    break;
+            }
+            _choiceMoveManager.SelectKey(key);
+            StopCoroutine(ChoicesTimer());
+            _coroutineTimer = null;//fix コルーチンリセット
+            _selectedChoices[_choicesCount] = _choicesNeo[_loopCount, _choicesCount, sum]; //選択肢を保存
+            _choicesCount++; //カウントを増やす
+            StartCoroutine(ChoiceEffect(_choicesCount == 3)); 
+            _audioSource.PlayOneShot(_audioClip);
+        }
     }
     public IEnumerator ChoicesTimer()   //選択のタイマー //fix 挙動の修正
     {
@@ -99,7 +128,7 @@ public class Choices : MonoBehaviour
             timer += Time.deltaTime;
         }
         int random = Random.Range(0, 3);
-        ChoiceButton(random, ' ');
+        ChoiceButton(-1);
     }
     IEnumerator ChoiceEffect(bool nextLoop)
     {
