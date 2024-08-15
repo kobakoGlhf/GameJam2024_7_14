@@ -34,15 +34,18 @@ public class ChoicesMoveManager : MonoBehaviour
     }
     public void SelectKey(char pushKey)//テスト用
     {
-        foreach (KeyValuePair<char,ChoicesObjectMoves> choicesMove in _choiceskey)
+        foreach (KeyValuePair<char, ChoicesObjectMoves> choicesMove in _choiceskey)
         {
-            if(choicesMove.Key == pushKey)
+            if (choicesMove.Key == pushKey)
             {
-                choicesMove.Value?.FadeInOut(true, _waitMoveTimer, _movingTime,_waitResetTimer);
+                choicesMove.Value?.FadeInOut(true, _waitMoveTimer, _movingTime, _waitResetTimer);
             }
             else choicesMove.Value?.FadeInOut(false, _waitMoveTimer, _movingTime, _waitResetTimer);
         }
-        var timer= UiTimeLimit._recentObject.GetComponent<UiTimeLimit>();
-        timer?.StartCoroutine("FadeOut", _waitMoveTimer);
+        if (UiTimeLimit._recentObject != null)
+        {
+            var timer = UiTimeLimit._recentObject?.GetComponent<UiTimeLimit>();
+            timer?.StartCoroutine("FadeOut", _waitMoveTimer);
+        }
     }
 }

@@ -8,5 +8,6 @@ public class MainSceneBGM : MonoBehaviour
     public void BGMSet()
     {
         _audioSource.clip = _clip[CharaPic._charaNam];
+        _audioSource.Play();
     }
 }
