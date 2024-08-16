@@ -6,6 +6,7 @@ public class BGMObj : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         BGMObj[] bgmObj = FindObjectsOfType<BGMObj>();
         foreach (BGMObj obj in bgmObj)
         {
@@ -18,6 +19,10 @@ public class BGMObj : MonoBehaviour
     void Start()
     {
         _animator = GetComponent<Animator>();
-        _animator.enabled = false;
+        if(_animator != null) _animator.enabled = false;
+    }
+    public void AnimationPlay()
+    {
+        _animator.enabled = true;
     }
 }

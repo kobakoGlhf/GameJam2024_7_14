@@ -23,7 +23,6 @@ public class TitleScene : MonoBehaviour
         _text[0].color = Color.red;
         _text[1].color = Color.white;
         _index = 0;
-        DontDestroyOnLoad(_bgmObj);
     }
 
     // Update is called once per frame

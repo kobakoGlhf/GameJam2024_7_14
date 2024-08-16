@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class FOutTitle : MonoBehaviour
 {
     public GameObject targetObject;
+    public BGMObj _bgm;
 
     public void ShowObject()
     {
@@ -28,6 +29,7 @@ public class FOutTitle : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             targetObject.SetActive(true);
+            _bgm.AnimationPlay();
         }
         
     }

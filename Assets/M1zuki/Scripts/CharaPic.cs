@@ -8,6 +8,7 @@ public class CharaPic : MonoBehaviour
     [SerializeField] GameObject _fadePanel;
     GameObject _bgmObj;
     Animator _bgmAnimator;
+    BGMObj _bgm;
     [SerializeField] int _changeSceneWaitTime = 2;
     [SerializeField] SEObj _seObj;
     [SerializeField, Tooltip("ÉQÅ[ÉÄÉVÅ[Éì")] string _sceneName0;
@@ -21,6 +22,7 @@ public class CharaPic : MonoBehaviour
         _bgmObj = GameObject.Find("BGM");
         _bgmAnimator = _bgmObj.GetComponent<Animator>();
         _bgmAnimator.enabled = false;
+        _bgm=GetComponent<BGMObj>();
     }
 
     // Update is called once per frame
@@ -46,13 +48,13 @@ public class CharaPic : MonoBehaviour
     public void CharacterPic(int num)
     {
         _charaNam = num;
-        NextScene("SceneChange0");
+        NextScene(nameof(SceneChange0));
     }
     void NextScene(string methodName)
     {
         _seObj.PlaySe(_clip);
         _fadePanel.SetActive(true);
-        _bgmAnimator.enabled = true;
+        _bgm.AnimationPlay();
         Invoke(methodName, _changeSceneWaitTime);
         _isFirst = true;
     }
