@@ -22,7 +22,7 @@ public class CharaPic : MonoBehaviour
         _bgmObj = GameObject.Find("BGM");
         _bgmAnimator = _bgmObj.GetComponent<Animator>();
         _bgmAnimator.enabled = false;
-        _bgm=GetComponent<BGMObj>();
+        _bgm=_bgmObj.GetComponent<BGMObj>();
     }
 
     // Update is called once per frame

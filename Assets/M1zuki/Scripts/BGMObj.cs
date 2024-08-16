@@ -23,6 +23,6 @@ public class BGMObj : MonoBehaviour
     }
     public void AnimationPlay()
     {
-        _animator.enabled = true;
+        if (_animator != null) _animator.enabled = true;
     }
 }
